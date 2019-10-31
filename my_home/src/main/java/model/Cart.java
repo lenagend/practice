@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,5 +97,8 @@ public class Cart {
 		cartDao.insertCart(item);
 	}
 	
+	public List<CartItem> getCart(String id){
+		return this.cartDao.selectCart(id);
+	}
 	
 }

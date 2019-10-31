@@ -17,7 +17,7 @@
 </c:choose>
 <form:form modelAttribute="user" action="../cart/login.html" method="post">
 아이디: <form:input path="user_id" size="12"/><br/>
-<font color="red"><form:errors path="user_id"/></font>
+<font color="red"><form:errors path="user_id"/></font><br/>
 패스워드: <form:password path="password" size="12"/><br/>
 <font color="red"><form:errors path="password"/></font><br/>
 

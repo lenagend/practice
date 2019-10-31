@@ -17,15 +17,19 @@
 	<c:otherwise>
 	로그인 되지 않았습니다.<br/>
 	계정과 암호를 확인하세요.
+		<c:if test="${cartLogin =='YES' }">
+			<a href="../cart/login.html">▶다시 로그인 하기</a>
+		</c:if>
 	</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${param.CART=='YES'}">
+	<c:when test="${cartLogin=='SUCCESS'}">
 	<script type="text/javascript">
 		self.close(); opener.window.location.reload();
 	</script>
 	</c:when>
 	<c:otherwise>
+	
 	
 	</c:otherwise>
 </c:choose>

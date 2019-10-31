@@ -62,7 +62,7 @@ function startClock(){
 <a href="../read/read.html">게시글 보기</a><br/>
 <a href="../product/open.html">상품정보 등록</a><br/>
 <a href="../read/product.html">상품정보 보기</a><br/>
-<a href="">장바구니 보기</a><br/>
+<a href="../cart/show.html">장바구니 보기</a><br/>
 <a href="">이미지 게시판 작성</a><br/>
 <a href="">이미지 게시판 목록</a><br/>
 </td>

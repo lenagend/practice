@@ -1,14 +1,21 @@
 package controller;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.LoginDao;
 import model.Cart;
+import model.CartItem;
 import model.User;
 
 @Controller
@@ -34,7 +41,7 @@ public class CartController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/cart/login.html")
+	@RequestMapping(value="/cart/login.html", method=RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("home/cartLogin");
 		mav.addObject("RESULT", "nocart");
@@ -43,6 +50,63 @@ public class CartController {
 	}
 	
 	
+	@RequestMapping(value="/cart/login.html", method=RequestMethod.POST)
+	public ModelAndView cartLogin(@Valid User user, BindingResult br, HttpSession session) {
+		if(br.hasErrors()) {
+			ModelAndView mav = new ModelAndView("home/cartLogin");
+			return mav;
+		}
+		ModelAndView mav = new ModelAndView("home/loginResult");
+		String password = loginDao.getPassword(user.getUser_id());
+		if( !user.getPassword().equals(password)) {
+			mav.addObject("cartLogin","YES"); return mav;
+		}else {
+			mav.addObject("cartLogin", "SUCCESS");
+			session.setAttribute("loginUser", user.getUser_id());
+			//DB에서 카트 정보를 불러온다
+			List<CartItem> cartList = cart.getCart(user.getUser_id());
+			if(cartList != null) {
+				Iterator it = cartList.iterator();
+				int i = 0;
+				while(it.hasNext()) {
+					CartItem ci =(CartItem)it.next();
+					this.cart.setCodeList(i, ci.getCode());
+					this.cart.setNumList(i, ci.getNum());
+					i++;
+				}
+				session.setAttribute("CART", this.cart);
+				
+			}
+			
+			//DB에서 카트정보를 불러온다
+		}
+		return mav;
+	}
 	
+	@RequestMapping(value="/cart/show.html")
+	public ModelAndView show(HttpSession session) {
+		ModelAndView mav = new ModelAndView("home/frame");
+		String id = (String)session.getAttribute("loginUser");
+		if(id == null)return mav;
+		List<CartItem> cartList = cart.getCart(id);
+		int totalAmount = 0;
+		if(cartList.size()>0) {
+			Iterator it = cartList.iterator();
+			while(it.hasNext()) {
+				CartItem ci = (CartItem)it.next();
+				int total = ci.getPrice()*ci.getNum();
+				totalAmount = totalAmount+total;
+				
+			}
+			mav.addObject("SIZE","YES");
+		}else {//장바구니에 상품이 없는경우
+			mav.addObject("SIZE","NO");
+			
+		}
+		mav.addObject("totalAmount",totalAmount);
+		mav.addObject("BODY", "cartListView.jsp");
+		mav.addObject("CART_LIST", cartList);
+		return mav;
+	}
 	
 }
