@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.myMapper">
+<select id="checkId" parameterType="String" resultType="Integer">
+select count(*) as cnt from user_account
+where user_id = #{id}
+</select>
+
+<select id="getPassword" parameterType="String" resultType="String">
+select password from user_account
+where user_id = #{id}
+</select>
+
+<select id="getUser" parameterType="String" resultType="model.User">
+select * from user_account
+where user_id = #{id}
+</select>
+
+<insert id="putUser" parameterType="model.User">
+insert into user_account(user_id, user_name, password, email, job ,gender) values(#{user_id},#{user_name},#{password},#{email},#{job},#{gender})
+</insert>
+
+<select id="getMaxBbsId" resultType="Integer">
+	select max(seqno) as max_id from bbs
+</select>
+
+<select id="getMaxNoticeId" resultType="Integer">
+	select max(seqno) as max_id from Notice
+</select>
+
+<insert id="putBbs" parameterType="model.Bbs">
+	insert into bbs values(#{seqno},#{title},#{content},#{id},#{bbs_date})
+</insert>
+
+<insert id="putNotice" parameterType="model.Notice">
+	insert into Notice values(#{seqno},#{title},#{content},#{id},#{notice_date})
+</insert>
+
+
+
+<select id="getBBSCount" resultType="Integer">
+select count(*) as num from bbs
+</select>
+
+<select id="getBBSDetail" resultType="model.Bbs" parameterType="Integer">
+select * from bbs where seqno=#{seqno}
+</select>
+
+<select id="getBbsList" resultType="model.Bbs" parameterType="model.Condition">
+select seqno, title, id, content, bbs_date from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from bbs order by seqno desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+</select>
+
+
+
+
+<select id="getNoticeCount" resultType="Integer">
+select count(*) as num from Notice
+</select>
+
+<select id="getNoticeDetail" resultType="model.Notice" parameterType="Integer">
+select * from notice where seqno=#{seqno}
+</select>
+
+<select id="getNoticeList" resultType="model.Notice" parameterType="model.Condition">
+select seqno, title, id, content, notice_date from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from notice order by seqno desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+</select>
+
+
+
+
+
+<select id="getItemCount" resultType="Integer">
+	select count(*) as cnt from user_item
+</select>
+
+<select id="getItemList" resultType="model.Item" 
+parameterType="model.Condition">
+select * from
+(select a.*, rownum rn from
+(select * from user_item order by code desc) a)
+where rn between #{startRow} and #{endRow}
+</select>
+
+<insert id="putItem" parameterType="model.Item">
+insert into user_item values(#{code},#{name},#{price},#{info},#{origin})
+</insert>
+
+
+<select id="getItem" resultType="model.Item">
+	select * from user_item where code=#{code}
+
+</select>
+
+
+<!-- Cart -->
+<select id="selectCart" resultType="model.CartItem">
+select cart.code code, cart.num num, i.price price, 
+i.name name from cart cart, user_item i where cart.code = i.code and
+cart.id =#{id}
+</select>
+
+
+<update id="updateCart">
+	update cart set num = #{num} where code = #{code} and id=#{id}
+</update>
+
+<delete id="deleteCart">
+	delete from cart where code=#{code} and id=#{id}
+</delete>
+
+<insert id="insertCart">
+	insert into cart values(#{seqno},#{code},#{num},#{id})
+</insert>
+
+<select id="selectMaxCart" resultType="Integer">
+	select max(seqno) from cart
+</select>
+
+
+
+
+</mapper>
+
+
+
+
+
+
