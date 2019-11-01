@@ -140,8 +140,15 @@ public class ReadController {
 	}
 	
 	
+	@RequestMapping(value="/read/readImage.html")
+	public ModelAndView readImage() {
+		ModelAndView mav = new ModelAndView("home/frame");
+		//DB조회
+		
+		mav.addObject("BODY", "read_image.jsp");
+		return mav;
 	
-	
+	}
 	
 	
 	

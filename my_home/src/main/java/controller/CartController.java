@@ -109,4 +109,28 @@ public class CartController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/cart/modify.html")
+	public ModelAndView modify(String CODE, Integer NUMBER, String BTN,
+			HttpSession session) {
+	
+		String id = (String)session.getAttribute("loginUser");
+		if(BTN.equals("수정")) {
+			cart.modifyItem(CODE, NUMBER, id);
+			
+		}else if(BTN.equals("삭제")) {
+			cart.deleteItem(CODE, id);
+			
+		}
+	
+		return new ModelAndView("redirect:/cart/show.html");
+		
+	}
+	
+	
 }
+
+
+
+
+
+

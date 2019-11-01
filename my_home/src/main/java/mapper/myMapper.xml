@@ -130,6 +130,51 @@ cart.id =#{id}
 </select>
 
 
+<!-- 이미지게시판 -->
+
+<select id="getMaxWritingId" resultType="Integer">
+	select max(writing_id) from writing_info
+</select>
+
+<select id="getWriting" resultType="model.Writing">
+	select * from
+	(select a.*, rownum rn from
+	(select * from writing_info order by group-id desc, order_no asc) a)
+
+</select>
+
+<insert id="insertWriting">
+	insert into writing_info values(#{writing_id},#{group_id},#{order_no},#{parent_id},#{register_date},#{writer_name},#{email},#{image_name},#{password},#{title},#{content})
+</insert>
+
+
+<select id="selectMaxGroupId" resultType="Integer">
+	select max(group_id) max_id from writing_info
+</select>
+
+<update id="updateOrderNoReply">
+	update writing_info set order_no = order_no +1
+	where group_id = #{group_id} and order_no >=#{order_no
+	}
+</update>
+
+<select id="selectImageCount" resultType="Integer">
+	select count(*) from writing_info
+</select>
+
+<select id="selectReplyPage" resultType="Integer">
+select rn from
+	(select a.*, rownum rn from
+		(select * from writing_info
+		order by group_id desc, order_no asc)a
+	)
+where writing_id = #{writing_id}
+</select>
+
+
+
+
+
 
 
 </mapper>

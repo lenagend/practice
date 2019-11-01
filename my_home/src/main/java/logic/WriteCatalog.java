@@ -5,6 +5,7 @@ import java.util.List;
 import model.Bbs;
 import model.Condition;
 import model.Notice;
+import model.Writing;
 
 public interface WriteCatalog {
 Integer getMaxBbsId();
@@ -20,5 +21,16 @@ void putNotice(Notice notice);
 List<Notice> readNotice(Condition c);
 Integer getNoticeCount();
 Notice getNoticeDetail(Integer id);
+
+
+Integer getMaxWritingId();
+void insertWriting(Writing writing);	
+List<Writing> getWriting(Condition c);
+Integer selectMaxGroupId();
+void updateOrderNoReply(Writing writing);
+
+
+Integer selectReplyPage(Integer seqno);
+Integer selectImageCount();
 
 }

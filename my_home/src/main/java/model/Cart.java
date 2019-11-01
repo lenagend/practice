@@ -27,7 +27,7 @@ public class Cart {
 
 	}
 
-	public void deleteItem(String code) {
+	public void deleteItem(String code, String id) {
 		for(int cnt = 0; cnt<codeList.size(); cnt++) {
 			if(codeList.get(cnt).equals(code)) {
 				codeList.remove(code);

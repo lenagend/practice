@@ -63,8 +63,8 @@ function startClock(){
 <a href="../product/open.html">상품정보 등록</a><br/>
 <a href="../read/product.html">상품정보 보기</a><br/>
 <a href="../cart/show.html">장바구니 보기</a><br/>
-<a href="">이미지 게시판 작성</a><br/>
-<a href="">이미지 게시판 목록</a><br/>
+<a href="../write/writeForm.html">이미지 게시판 작성</a><br/>
+<a href="../write/writeList.html">이미지 게시판 목록</a><br/>
 </td>
 	<td style="width:650px;border:1px solid blue;">
 	<c:choose>

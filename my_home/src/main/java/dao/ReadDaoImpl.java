@@ -41,5 +41,15 @@ public class ReadDaoImpl implements ReadDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("mapper.myMapper.getNoticeDetail", id);
 	}
+	
+	public Integer selectImageCount() {
+		// TODO Auto-generated method stub
+		return session.selectOne("mapper.myMapper.selectImageCount");
+	}
+	
+	public Integer selectReplyPage(Integer seqno) {
+		// TODO Auto-generated method stub
+		return session.selectOne("mapper.myMapper.selectReplyPage", seqno);
+	}
 
 }

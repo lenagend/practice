@@ -10,6 +10,7 @@ import dao.WriteDao;
 import model.Bbs;
 import model.Condition;
 import model.Notice;
+import model.Writing;
 @Service
 public class WriteCatalogImpl implements WriteCatalog {
 	@Autowired
@@ -67,6 +68,40 @@ public class WriteCatalogImpl implements WriteCatalog {
 	
 	public Notice getNoticeDetail(Integer id) {
 		return readDao.getNoticeDetail(id);
+	}
+
+	public Integer getMaxWritingId() {
+		// TODO Auto-generated method stub
+		return writeDao.getMaxWritingId();
+	}
+
+	public void insertWriting(Writing writing) {
+		// TODO Auto-generated method stub
+		writeDao.insertWriting(writing);
+	}
+
+	public List<Writing> getWriting(Condition c) {
+		// TODO Auto-generated method stub
+		return writeDao.getWriting(c);
+	}
+	
+	
+	public Integer selectMaxGroupId() {
+		// TODO Auto-generated method stub
+		return writeDao.selectMaxGroupId();
+	}
+	public void updateOrderNoReply(Writing writing) {
+		writeDao.updateOrderNoReply(writing);
+		
+	}
+	
+	public Integer selectImageCount() {
+		// TODO Auto-generated method stub
+		return readDao.selectImageCount();
+	}
+	public Integer selectReplyPage(Integer seqno) {
+		// TODO Auto-generated method stub
+		return readDao.selectReplyPage(seqno);
 	}
 
 }

@@ -35,6 +35,13 @@
 
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"></bean>
 
+		<!-- 업로드할때 사용하는 객체 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+	p:maxInMemorySize="51200000"
+	p:maxUploadSize="51200000">
+	
+	</bean>
+
 	<context:component-scan base-package="dao, logic, ,controller, model"></context:component-scan>
     <mvc:annotation-driven />
 
