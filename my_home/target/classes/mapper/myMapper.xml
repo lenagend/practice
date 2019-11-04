@@ -139,7 +139,7 @@ cart.id =#{id}
 <select id="getWriting" resultType="model.Writing">
 	select * from
 	(select a.*, rownum rn from
-	(select * from writing_info order by group-id desc, order_no asc) a)
+	(select * from writing_info order by group_id desc, order_no asc) a)
 
 </select>
 
@@ -162,18 +162,11 @@ cart.id =#{id}
 	select count(*) from writing_info
 </select>
 
-<select id="selectReplyPage" resultType="Integer">
-select rn from
-	(select a.*, rownum rn from
-		(select * from writing_info
-		order by group_id desc, order_no asc)a
-	)
-where writing_id = #{writing_id}
+
+<select id="selectImageWriting" resultType="model.Writing">
+
+	select * from writing_info where writing_id = #{writing_id}
 </select>
-
-
-
-
 
 
 

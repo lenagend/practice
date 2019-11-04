@@ -25,4 +25,8 @@ public interface WriteDao {
 	Integer selectMaxGroupId();
 	void updateOrderNoReply(Writing writing);
 	
+	Writing getImageWriting(Integer id);
+	void deleteWriting(Integer id);
+	
+	void updateWriting(Writing writing);
 }

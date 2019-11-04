@@ -33,4 +33,10 @@ void updateOrderNoReply(Writing writing);
 Integer selectReplyPage(Integer seqno);
 Integer selectImageCount();
 
+Writing getImageWriting(Integer id);
+void deleteWriting(Integer id);
+
+
+void updateWriting(Writing writing);
+
 }

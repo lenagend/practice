@@ -49,7 +49,7 @@ public class ReadDaoImpl implements ReadDao {
 	
 	public Integer selectReplyPage(Integer seqno) {
 		// TODO Auto-generated method stub
-		return session.selectOne("mapper.myMapper.selectReplyPage", seqno);
+		return session.selectOne("mapper.myMapper2.selectReplyPage", seqno);
 	}
 
 }

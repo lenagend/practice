@@ -100,8 +100,20 @@ public class WriteCatalogImpl implements WriteCatalog {
 		return readDao.selectImageCount();
 	}
 	public Integer selectReplyPage(Integer seqno) {
-		// TODO Auto-generated method stub
+		
 		return readDao.selectReplyPage(seqno);
 	}
 
+	public Writing getImageWriting(Integer id) {
+		// TODO Auto-generated method stub
+		return writeDao.getImageWriting(id);
+	}
+	
+	public void deleteWriting(Integer id) {
+		writeDao.deleteWriting(id);
+	}
+	public void updateWriting(Writing writing) {
+		writeDao.updateWriting(writing);
+		
+	}
 }

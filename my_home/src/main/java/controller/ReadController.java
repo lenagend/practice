@@ -13,6 +13,7 @@ import model.Bbs;
 import model.Condition;
 import model.Item;
 import model.Notice;
+import model.Writing;
 
 @Controller
 public class ReadController {
@@ -141,10 +142,11 @@ public class ReadController {
 	
 	
 	@RequestMapping(value="/read/readImage.html")
-	public ModelAndView readImage() {
+	public ModelAndView readImage(Integer id) {
 		ModelAndView mav = new ModelAndView("home/frame");
 		//DB조회
-		
+		Writing writing = writeCatalog.getImageWriting(id);
+		mav.addObject("writing" ,writing);
 		mav.addObject("BODY", "read_image.jsp");
 		return mav;
 	

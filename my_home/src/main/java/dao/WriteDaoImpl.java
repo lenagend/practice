@@ -78,5 +78,16 @@ public class WriteDaoImpl implements WriteDao {
 		session.update("mapper.myMapper.updateOrderNoReply",writing);
 	}
 	
+	public Writing getImageWriting(Integer id) {
+		
+		return session.selectOne("mapper.myMapper.selectImageWriting",id);
+	}
 
+	public void deleteWriting(Integer id) {
+		session.delete("mapper.myMapper2.deleteImageWriting",id);
+	}
+	
+	public void updateWriting(Writing writing) {
+		session.update("mapper.myMapper2.updateImageWriting",writing);
+	}
 }

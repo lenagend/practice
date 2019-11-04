@@ -4,5 +4,6 @@
 <configuration>
 	<mappers>
 		<mapper resource="mapper/myMapper.xml"/>
+		<mapper resource="mapper/myMapper2.xml"/>
 	</mappers>
 </configuration>
