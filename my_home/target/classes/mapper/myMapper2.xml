@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.myMapper2">
+
+<select id="selectReplyPage" resultType="Integer" >
+select rn from
+	(select a.*, ROWNUM rn from
+		(select WRITING_ID ,
+GROUP_ID ,
+ORDER_NO ,
+PARENT_ID ,
+REGISTER_DATE ,
+WRITER_NAME ,
+EMAIL ,
+IMAGE_NAME ,
+PASSWORD ,
+TITLE ,
+CONTENT  from writing_info
+		order by GROUP_ID desc, order_no asc)a
+	)
+where writing_id = #{value}
+</select>
+
+<delete id="deleteImageWriting">
+	delete from writing_info
+	where writing_id = #{value}
+</delete>
+
+<update id="updateImageWriting">
+	update writing_info set writer_name=#{writer_name}, email = #{email}, title = #{title}, content = #{content},
+	image_name =#{image_name} where writing_id = #{writing_id}
+</update>
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
