@@ -39,7 +39,7 @@ placeholder="암호를 입력하세요"/><br/>
 <input type="submit" value="로그인"/>
 </form:form>
 </c:if>
-<c:if test="${param.RESULT ==null}">
+<c:if test="${param.RESULT ==null && param.MSG1 != 'Y'}">
 <form:form modelAttribute="user" action="../login/frame.html" method="post">
 아이디 : <form:input path="user_id" size="12"
 placeholder="아이디를 입력하세요"/>
@@ -52,9 +52,24 @@ placeholder="암호를 입력하세요"/>
 <input type="submit" value="로그인"/>
 </form:form>
 </c:if>
-<input type="button" value="임시 암호 받기" onclick="goReload()"/>
 
 
+<c:if test="${param.MSG1 == 'Y' }">
+게시글을 등록하려면, 로그인 해야 합니다.<br/>
+<form:form modelAttribute="user" 
+	action="../login/imageLogin.html"	method="post">
+아이디 : <form:input path="user_id" size="12" 
+		placeholder="아이디를 입력하세요."/>
+	<font color="red"><form:errors path="user_id"/>
+	</font><br/>
+패스워드 : <form:password path="password" size="12"
+		placeholder="암호를 입력하세요."/>
+	<font color="red"><form:errors path="password"/>
+	</font><br/>
+<input type="submit" value="로그인"/>
+</form:form>
+
+</c:if>
 
 
 </body>

@@ -19,19 +19,17 @@
 </table>
 
 <table border="1" width="100%">
-	<tr><th>이미지</th><th>글제목</th><th>작성자</th>
-	<th>작성일</th><th>다운로드</th></tr>
+	<tr><th width="50">글번호</th><th>이미지</th><th>글제목</th><th>작성자</th>
+	<th>작성일</th></tr>
 <c:forEach var="w" items="${LIST }">
-	<tr><td><img alt="" 
+	<tr><td>${w.writing_id }</td><td><img alt="" 
 	src="${pageContext.request.contextPath }/upload/${w.image_name }"
 				width="50" height="50"></td>
 	<td><a href="javascript:goView(${w.writing_id })">
 	${w.title }</a>
 	</td><td>${w.writer_name }</td>
 	<td>${w.register_date }</td>
-	<td>${w.image_name }
-	<a href="javascript:goDown('${w.image_name }')">
-	다운로드</a></td>
+	
 	</tr>
 </c:forEach>
 </table><br/>
@@ -61,8 +59,8 @@
 </c:if>
 <script type="text/javascript">
 function goPage(page){
-	document.move.action="image-list";
-	document.move.page.value=page;
+	document.move.action="../write/writeList.html";
+	document.move.PAGE_NUM.value=page;
 	document.move.submit();
 }
 function goDown(name){

@@ -78,13 +78,12 @@ public class WriteController {
 		}
 		Integer maxId=writeCatalog.getMaxWritingId();
 		if(maxId == null) maxId = 0;
-		
 		if(writing.getParent_id() == null) {//원글인경우
 			writing.setParent_id(0);
 			writing.setOrder_no(0);
 			//그룹ID증가
 			Integer gId=writeCatalog.selectMaxGroupId();
-			if(gId==null) gId=0;
+			if(gId == null) gId = 0;
 			writing.setGroup_id(gId+1);
 		}else {//답글인 경우 
 			writing.setParent_id(parent_id);
@@ -105,7 +104,6 @@ public class WriteController {
 			"writeResult.jsp?SEQNO="+(maxId+1));
 		return mav;
 	}
-	
 	@RequestMapping(value="/write/writeList.html")
 	public ModelAndView list(Integer SEQNO, Integer PAGE_NUM) {
 		if(PAGE_NUM==null) PAGE_NUM = 1;
@@ -240,6 +238,7 @@ public class WriteController {
 		mav.addObject("title", "RE]"+original.getTitle());
 		mav.addObject("BODY","writeForm.jsp?group_id="+
 				group_id+"&parent_id="+parent_id);
+		
 		return mav;
 	}
 	

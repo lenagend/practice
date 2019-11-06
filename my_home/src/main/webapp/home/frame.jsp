@@ -7,7 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/frame.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+
 <script type="text/javascript">
+$(document).ready(function() {
+	$(".menu").hover(function name() {
+		$(this).addClass("myHover");
+	}, function() {
+		$(this).removeClass("myHover");
+	})
+});
 function workingClock(){
 	var days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일","토요일"];
 	var today = new Date();
@@ -55,16 +65,16 @@ function startClock(){
 		</c:otherwise>
 	</c:choose>
 	</fieldset>
-<a href="../home/intro.html?BODY=intro.jsp">자기소개</a><br/>
-<a href="../home/noticeTemplate.html">공지사항 쓰기</a><br/>
-<a href="../read/readNotice.html">공지사항 읽기</a><br/>
-<a href="../home/bbsTemplate.html">게시글 쓰기</a><br/>
-<a href="../read/read.html">게시글 보기</a><br/>
-<a href="../product/open.html">상품정보 등록</a><br/>
-<a href="../read/product.html">상품정보 보기</a><br/>
-<a href="../cart/show.html">장바구니 보기</a><br/>
-<a href="../write/writeForm.html">이미지 게시판 작성</a><br/>
-<a href="../write/writeList.html">이미지 게시판 목록</a><br/>
+<div class="menu"><a href="../home/intro.html?BODY=intro.jsp">자기소개2</a></div>
+<div class="menu"><a href="../home/noticeTemplate.html">공지사항 쓰기</a></div>
+<div class="menu"><a href="../read/readNotice.html">공지사항 읽기</a></div>
+<div class="menu"><a href="../home/bbsTemplate.html">게시글 쓰기</a></div>
+<div class="menu"><a href="../read/read.html">게시글 보기</a></div>
+<div class="menu"><a href="../product/open.html">상품정보 등록</a></div>
+<div class="menu"><a href="../read/product.html">상품정보 보기</a></div>
+<div class="menu"><a href="../cart/show.html">장바구니 보기</a></div>
+<div class="menu"><a href="../write/writeForm.html">이미지 게시판 작성</a></div>
+<div class="menu"><a href="../write/writeList.html">이미지 게시판 목록</a></div>
 </td>
 	<td style="width:650px;border:1px solid blue;">
 	<c:choose>

@@ -51,8 +51,8 @@ border="0"></td></tr>
 
 <form name="move" method="post">
 	<input type="hidden" name="id" value="${writing.writing_id}"/>
-	<input type="hidden" name="parentid" value="${writing.writing_id }">
-	<input type="hidden" name="groupid" value="${writing.group_id }"/>
+	<input type="hidden" name="parent_id" value="${writing.writing_id }">
+	<input type="hidden" name="group_id" value="${writing.group_id }"/>
 </form>
 
 

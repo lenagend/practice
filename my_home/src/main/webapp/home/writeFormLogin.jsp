@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-	window.open("../login/login.html", "form_login", "width=300, height=250").focus();
+	window.open("../login/login.html?MSG1=Y", "form_login", "width=300, height=250").focus();
 </script>
 </body>
 </html>
