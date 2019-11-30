@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.adminMapper">
+
+<update id="userBlind">
+update member set blind = 'yes' where nickname=#{value}
+</update>
+
+<update id="novelBlind">
+update novel set blind = 'yes' where id=#{value}
+</update>
+
+<select id="getReport" resultType="model.Report_novel">
+
+
+
+select seqno, email, title, content, regi_date from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from report_novel order by seqno desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+<select id="countReport" resultType="Integer">
+select count(*) from report_novel
+
+</select>
+
+
+<update id="userBlind2">
+update member set blind = 'no' where nickname=#{value}
+</update>
+
+<update id="novelBlind2">
+update novel set blind = 'no' where id=#{value}
+</update>
+
+<select id="maxNoticeBno" resultType="Integer">
+select max(bno) from notice_board
+
+</select>
+
+<insert id="insertNotice">
+insert into notice_board values(#{bno},#{admin_id},#{title},#{content},to_char(sysdate, 'YYYY-MM-DD'),'no',#{nickname})
+</insert>
+
+<select id="getAdminByEmail" resultType="model.Admin">
+select * from admin where email= #{email}
+</select>
+
+<select id="getLatestNotice" resultType="model.Notice_board">
+
+select * from notice_board where blind = 'no' and rownum between 1 and 3 order by bno desc 
+</select>
+
+<select id="countNoticeBno" resultType="Integer">
+select count(bno) from notice_board
+</select>
+
+<select id="getNoticeList" resultType="model.Notice_board">
+select * from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from Notice_board  order by bno desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+<update id="deleteNotice">
+update notice_board set blind = 'yes' where bno=#{value}
+</update>
+
+<update id="modifyNotice">
+update notice_board set title = #{title}, content=#{content} where bno=#{bno}
+</update>
+
+</mapper>
+
+
+
+
+
+

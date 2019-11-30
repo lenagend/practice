@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.novelMapper">
+<!-- max작품아이디 찾기 -->
+<select id="maxSeqno" resultType="Integer">
+select max(id) as max_id from novel
+</select>
+
+<insert id="insertNovel">
+insert into novel values(#{title}, 0, #{email}, to_char(sysdate, 'YYYY-MM-DD'), 'no', #{image}, #{id}, 'no', #{description}, #{type}, 0, #{nickname}, 0)
+
+</insert>
+
+<select id="findMyNovel" resultType="model.Novel">
+
+
+select id, image, title, episode, email, regi_date, finish, description, type, epi_regi_date, favorite_num from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from Novel where email=#{email} and blind = 'no' order by id)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+<update id="modifyNovel">
+update novel set title = #{title} , image = #{image}, description = #{description}, type= #{type} where id = #{id}
+</update>
+<update id="deleteNovel">
+update novel set blind='yes' where id = #{id}
+</update>
+
+<insert id="insertEpi">
+insert into novel_board values(#{bno}, #{epi_title}, to_char(sysdate, 'YYYY-MM-DD'), 0, 0, 0, 'no', #{novel_id}, #{epi_number}, #{content})
+</insert>
+
+<select id="maxEpiBno" resultType="Integer">
+select max(bno) as max_bno from novel_board
+</select>
+
+<select id="maxEpisode"  resultType="Integer">
+select max(episode) as max_epi from novel where id = #{value}
+</select>
+
+<update id="addEpi">
+update novel set episode = episode + 1, epi_regi_date = to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+where id = #{value}
+</update>
+
+
+<select id="getEpiCount" resultType="Integer">
+select max(epi_number) as max_epi from novel_board where novel_id = #{value}
+</select>
+
+
+<select id="getEpiList" resultType="model.Novel_board" parameterType="condition.PagingCondition">
+select epi_number, epi_title, bno, content, regi_date, view_cnt, reco_cnt, repl_cnt from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from novel_board where novel_id = #{id} order by epi_number desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+</select>
+
+<select id="getMaxMyNovel" resultType="Integer">
+select count(id) from novel where email = #{value} and blind = 'no'
+</select>
+
+<select id="findParentNovel" resultType="model.Novel">
+
+select * from novel where id = #{value}
+</select>
+
+<select id="getEpiContent" resultType="model.Novel_board">
+select * from novel_board where epi_number = #{epi_number} and novel_id = #{novel_id}
+</select>
+
+
+<select id="findAllNovel" resultType="model.Novel">
+
+
+select id, image, title, episode, email, regi_date, finish, description, type,nickname, epi_regi_date,  favorite_num from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from Novel where  blind = 'no' and episode != 0 and email in(select email from member where blind='no') order by epi_regi_date desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+<select id="countNovelList" resultType="Integer">
+select count(*) from novel where blind = 'no' and episode != 0
+</select>
+
+
+<select id="favoriteAlready" resultType="Integer">
+select count(*) from favorite where email = #{email} and novel_id = #{novel_id} 
+</select>
+
+<insert  id="insertFavorite">
+insert into favorite values(#{email},#{novel_id}, #{seqno} )
+</insert>
+
+<select id="maxFavoriteSeqno" resultType="Integer">
+select max(seqno) from favorite
+</select>
+
+
+<select id="getMyFavorite" resultType="model.Novel">
+
+
+
+select id, image, title, episode, email, regi_date, finish, description, type, epi_regi_date,  favorite_num from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from novel where id in (select novel_id from favorite where email = #{email}) order by epi_regi_date desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+<select id="countMyFavorite" resultType="Integer">
+select count(novel_id) from favorite where email= #{value}
+</select>
+
+<update id="plusFavorite">
+update novel set FAVORITE_NUM = FAVORITE_NUM+1 where id=#{value}
+</update>
+
+<update id="minusFavorite">
+update novel set FAVORITE_NUM = FAVORITE_NUM -1 where id=#{value} and favorite_num>0
+</update>
+
+<delete id="deleteMyFavorite">
+delete from favorite where email= #{email} and novel_id=#{novel_id}
+
+</delete>
+
+
+<select id="findTop1Novel" resultType="model.Novel">
+
+
+select b.* from
+(select * from novel where
+email = 
+(select a.email from
+(select email from user_rank order by w_point desc)a
+where rownum = 1) and blind !='yes' order by epi_regi_date desc)b
+where rownum = 1
+</select> 
+
+<select id="findTop2Novel" resultType="model.Novel">
+
+
+select b.* from
+(select * from novel where
+email = 
+(select a.email from
+(select email, rownum rn from user_rank order by w_point desc)a
+where a.rn = 2) and blind !='yes' order by epi_regi_date desc)b
+where rownum = 1
+</select> 
+
+<select id="findTop3Novel" resultType="model.Novel">
+
+
+select b.* from
+(select * from novel where
+email = 
+(select a.email from
+(select email, rownum rn from user_rank order by w_point desc)a
+where a.rn = 3) and blind !='yes' order by epi_regi_date desc)b
+where rownum = 1
+</select> 
+
+
+<select id="findTop4Novel" resultType="model.Novel">
+
+
+select b.* from
+(select * from novel where
+email = 
+(select a.email from
+(select email, rownum rn from user_rank order by w_point desc)a
+where a.rn = 4) and blind !='yes' order by epi_regi_date desc)b
+where rownum = 1
+</select> 
+
+
+<select id="findTop5Novel" resultType="model.Novel">
+
+
+select b.* from
+(select * from novel where
+email = 
+(select a.email from
+(select email, rownum rn from user_rank order by w_point desc)a
+where a.rn = 5) and blind !='yes' order by epi_regi_date desc)b
+where rownum = 1
+</select> 
+
+<select id="findTop10NovelByReco_cnt" resultType="model.Novel">
+
+select id, title, image from novel
+where id in
+(select novel_id from
+(select * from novel_board 
+where blind !='yes' and
+regi_date between 
+ to_char(sysdate-2, 'YYYY-MM-DD')
+and to_char(sysdate, 'YYYY-MM-DD')
+order by reco_cnt desc)
+where rownum between 1 and 5 
+)
+and blind != 'yes'
+order by epi_regi_date desc
+
+
+
+</select> 
+
+
+
+<update id="plusViewCnt">
+update novel_board set view_cnt = view_cnt+1 where bno = #{value}
+</update>
+
+<update id="modifyEpi">
+update novel_board set epi_title = #{epi_title} , content = #{content} where bno = #{bno}
+
+</update>
+
+
+<!-- 장르별로 정렬하는 기능 만들자 -->
+<select id="findNovelByType" resultType="model.Novel">
+
+
+select id, image, title, episode, email, regi_date, finish, description, type,nickname, epi_regi_date, favorite_num from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from Novel where  blind = 'no' and episode != 0 and type=#{type} order by epi_regi_date desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+
+
+<select id="countTypeNovelList" resultType="Integer">
+select count(*) from novel where blind = 'no' and episode != 0 and type=#{type}
+</select>
+
+
+
+<!-- 좋아요 기능 -->
+<!-- 이미 좋아요한건지 -->
+<select id="likeyCheck" resultType="Integer">
+select count(*) from likey where likey_bno = ${likey_bno} and email = #{email}
+</select>
+
+<insert id="likey">
+insert into likey values(#{likey_bno}, #{seqno}, #{email})
+</insert>
+
+<update id="addLikey">
+update novel_board set reco_cnt = reco_cnt+#{reco_point} where bno=#{bno}
+</update>
+
+<select id="maxLikeySeqno" resultType="Integer">
+select max(seqno) from likey
+</select>
+
+<select id="maxReportSeqno" resultType="Integer">
+select max(seqno) from report_novel
+</select>
+
+<insert id="insertReport">
+insert into report_novel values(#{seqno},#{email},#{r_bno},#{title},#{content}, to_char(sysdate))
+</insert>
+
+<select id="cherkReportAlready" resultType="Integer">
+select count(*) from report_novel where email=#{email} and r_bno=#{r_bno}
+</select>
+
+<select id="countNotFinished" resultType="Integer">
+select count(*) from novel where email=#{email} and finish ='no'
+</select>
+
+<update id="novelFinish">
+update novel set finish = 'yes' where id =#{value}
+</update>
+
+<select id="thisNovelFinished" resultType="Integer">
+select count(*) from novel where id=#{value} and finish ='yes'
+</select>
+
+</mapper>
+
+
+
+
+
+

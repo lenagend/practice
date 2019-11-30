@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.rankMapper">
+<!-- 가입 성공 후 유저랭크 테이블에 삽입 -->
+<insert id="insertRank">
+
+insert into user_rank values(#{email}, #{w_point}, #{r_point}, #{seq_no}, #{reco_point}, #{w_icon_id}, #{r_icon_id})
+</insert>
+
+<select id="maxSeqno" resultType="Integer">
+select max(seq_no) as max_seqno from user_rank
+</select>
+
+<select id="getMemberRank" resultType="model.User_rank">
+select * from user_rank where email=#{value}
+</select>
+
+<select id="getIcon" resultType="model.Icon">
+select * from icon where icon_id = #{value}
+</select>
+
+<update id="updateReaders">
+update user_rank set r_icon_id = #{r_icon_id}, w_icon_id = #{w_icon_id}, reco_point =#{reco_point} where email=#{email}
+</update>
+
+<update id="AddR_point">
+update user_rank set r_point = r_point+1  where email=#{email}
+</update>
+<update id="AddW_point">
+update user_rank set w_point = w_point+1  where email=#{email}
+</update>
+
+<update id="AddW_point5">
+update user_rank set w_point = w_point+5  where email=#{email}
+</update>
+
+<select id="getW_icon_ImageByNickname" resultType="String">
+select icon_image from icon 
+where icon_id = (
+select w_icon_id from user_rank 
+where email=(select email from member
+where nickname=#{nickname}
+)
+
+)
+</select>
+
+<select id="getR_icon_ImageByNickname" resultType="String">
+select icon_image from icon 
+where icon_id = (
+select r_icon_id from user_rank 
+where email=(select email from member
+where nickname=#{nickname}
+)
+
+)
+</select>
+
+</mapper>
+
+
+
+
+
+
