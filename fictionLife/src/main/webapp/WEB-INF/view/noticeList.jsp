@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <c:if test="${empty NOTICE_LIST }">
@@ -26,10 +30,10 @@
 
 
 	
-					<table>
+					<table class="table table-striped">
 					<tr>
 						<td>제목</td>
-						<td>운영자</td>
+						<td>작성자</td>
 						<td>작성일</td>
 					</tr>
 		<c:forEach items="${NOTICE_LIST }" var="cnt">
@@ -39,13 +43,14 @@
 				<td>${cnt.title }</td>
 				<td>${cnt.nickname }</td>
 				<td>${cnt.regi_date }</td>
-			
-				<td>
 					<c:if test="${LOGINMEMBER.nickname == cnt.nickname }">
+				<td>
+				
 					<a href="../admin/loadModifyNoticeForm.html?bno=${cnt.bno }&title=${cnt.title}&content=${cnt.content}">수정</a>
 					<br /> <a href="../admin/deleteNotice.html?bno=${cnt.bno }">삭제</a>
-					</c:if>
+					
 				</td>
+				</c:if>
 			</tr>
 			<tr>
 				<td>

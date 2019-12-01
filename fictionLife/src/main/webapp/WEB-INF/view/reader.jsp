@@ -8,6 +8,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#reply{
+  		 width:35%;
+	    height:100%;
+	    margin-top:1%;
+	    margin-bottom: 5%;
+  		padding-top: none;
+  		padding-bottom: none;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+
+</style>
 </head>
 <body>
 
@@ -21,20 +36,22 @@
 	<tr>
 		<td>
 			<c:if test="${EPISODE.epi_number >1 }">
-				<a href="../home/loadReader.html?epi_number=${EPISODE.epi_number - 1 }&parentNovelId=${parentNovel.id}&parentNovelTitle=${parentNovel.title}&parentNovelEpisode=${parentNovel.episode}">◀</a>&nbsp;
+				<a href="../home/loadReader.html?epi_number=${EPISODE.epi_number - 1 }&pni=${parentNovel.id}&bno=${EPISODE.bno}">◀</a>&nbsp;
 			</c:if>		
 			<!-- 에피소드 제목 -->${EPISODE.epi_number}화, ${EPISODE.epi_title }&nbsp;
 			<c:if test="${EPISODE.epi_number < parentNovel.episode}">
-				<a href="../home/loadReader.html?epi_number=${EPISODE.epi_number + 1 }&parentNovelId=${parentNovel.id}&parentNovelTitle=${parentNovel.title}&parentNovelEpisode=${parentNovel.episode}">▶</a>&nbsp;
+				<a href="../home/loadReader.html?epi_number=${EPISODE.epi_number + 1 }&pni=${parentNovel.id}&bno=${EPISODE.bno}">▶</a>&nbsp;
 			</c:if>	
 		</td>
 	</tr>
+	
 	<tr>
 	
 		<td>
-			<textarea autofocus="autofocus" cols="80" rows="100" readonly="readonly">${EPISODE.content }</textarea>
-		</td>
+			<textarea autofocus="autofocus" cols="90" rows="100" readonly="readonly">${EPISODE.content }</textarea>
+	</td>
 	</tr>
+	
 	<tr>
 	<td>
 	<a href="../home/loadSeries.html?novelId=${parentNovel.id }">목록으로</a>
@@ -60,7 +77,8 @@
 		<input type="hidden" name="pni" value="${parentNovel.id }">
 		<input type="hidden" name="bno" value="${EPISODE.bno }">
 		<input type="hidden" name="rno" id="deleteRno">
-		<input type="text" placeholder="댓글 입력..." name="reply">
+		<textarea rows="3" cols="80" name="reply" placeholder="댓글 입력..."></textarea>
+		
 		<input type="submit" value="확인">
 		</form>
 		
@@ -78,20 +96,21 @@
 <c:if test="${endPage > pageCount }">
 	<c:set var="endPage" value="${pageCount }"/>
 </c:if>
+<div id="reply">
 		<table>
 			<tr>
 				<td><c:if test="${currentPage > 1 }">
 						<a href="../home/loadReader.html?pageNo=${currentPage -1 }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}">[이전]</a>
 					</c:if></td>
 				<td>
+				
 					<table>
 					
 						<c:forEach var="re" items="${REPLY_LIST }">
-
+							
 
 							<tr>
-								<td><img alt="" src="../rank_icon/${re.r_icon_image }" width="48" height="48">	${re.nickname} : </td>
-								<td>${re.content}</td>
+								<td><img alt="" src="../rank_icon/${re.r_icon_image }" width="32" height="32">	${re.nickname}</td>
 								<td>${re.regi_date}</td>
 								<td>
 								<c:if test="${sessionScope.LOGINMEMBER.nickname == re.nickname }">
@@ -99,6 +118,9 @@
 								</c:if>
 								</td>
 								<td><a href="#reReplyForm" onclick="reReplyForm(${re.rno});">답글(${re.repl_cnt }개) </a></td>							
+							</tr>
+							<tr>
+								<td>${re.content }</td>
 							</tr>
 							<tr>
 							
@@ -112,23 +134,26 @@
 												name="pni" value="${parentNovel.id }"> <input
 												type="hidden" name="bno" value="${EPISODE.bno }"> <input
 												type="hidden" name="parent_no" value="${EPISODE.bno }">
-											<input type="hidden" name="rno" value="${re.rno}"> <input
-												type="text" placeholder="댓글 입력..." name="reply"> <input
-												type="submit" value="확인">
+											<input type="hidden" name="rno" value="${re.rno}"> 
+											<textarea rows="3" cols="80" name="reply" placeholder="댓글 입력..."></textarea>
+											<input	type="submit" value="확인">
 										</form>
 										</c:if>
 										<table>
 										<c:forEach var="rere" items="${REREPLY_LIST }">
 											<c:if test="${rere.parent_no == re.rno }">
 												<tr>
-													<td>&nbsp;ㄴ<img alt="" src="../rank_icon/${rere.r_icon_image }" width="48" height="48">${rere.nickname} :</td>
+													<td>&nbsp;ㄴ<img alt="" src="../rank_icon/${rere.r_icon_image }" width="32" height="32">${rere.nickname}</td>
 													<td>${rere.content}</td>
-													<td>${rere.regi_date}</td>
+													
 													<td>
 													<c:if test="${sessionScope.LOGINMEMBER.nickname == rere.nickname }">
 													<a id="deleteReRepl" href="#deleteReRepl" onclick="deleteRepl(${rere.rno});" >삭제</a>
 													</c:if>
 													</td>
+												</tr>
+												<tr>
+													<td>${rere.regi_date}</td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -141,6 +166,7 @@
 							</tr>
 						</c:forEach>
 					</table>
+					
 				</td>
 				<td><c:if test="${currentPage < pageCount }">
 						<a href="../home/loadReader.html?pageNo=${currentPage +1 }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}">[다음]</a>
@@ -178,7 +204,7 @@
 
 <a href="../home/loadReader.html?pageNo=${pageCount }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}">[마지막]</a>
 
-
+</div>
 </c:if>
 
 

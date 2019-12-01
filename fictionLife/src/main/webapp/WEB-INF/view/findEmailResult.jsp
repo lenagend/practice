@@ -8,10 +8,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+#loginFormDiv{
+   width:35%;
+	    height:100%;
+	    margin-top:5%;
+	    margin-bottom: 30%;
+  		padding-top: 20%;
+  		padding-bottom: 5%;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+
+.input{
+
+  width:300px;
+  height:50px;
+  font-size:150%;
+  font-family: Malgun Gothic;
+ 
+}
+
+.button{
+ width:300px;
+  height:50px;
+  font-family: Malgun Gothic;
+ background-color: #66CCFF;
+ font-size:150%;
+ color: #003399;
+}
+.text_link{
+
+
+  font-size:150%;
+	font-family: Malgun Gothic;
+	color: black;
+}
+
+</style>
 </head>
 <body>
 
-<div>계정 찾기 결과</div>
+<div id="loginFormDiv">계정 찾기 결과
 	<form action="../home/loadFindEmail.html" method="post">
 		<table>
 			<c:choose>
@@ -27,7 +68,7 @@
 						<td>관리자 문의: 010-7159-2578</td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="다시 찾기" /></td>
+						<td><input class="button" type="submit" value="다시 찾기" /></td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -38,7 +79,7 @@
 						<td><font color="gray">비밀번호가 이메일로 전송되었습니다</font></td>
 					</tr>
 					<tr>
-						<td><a href="../home/goMain.html">홈으로</a></td>
+						<td><a class="text_link" href="../home/goMain.html">홈으로</a></td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
@@ -46,6 +87,6 @@
 
 		</table>
 	</form>
-	
+</div>	
 </body>
 </html>

@@ -11,13 +11,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
  <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style type="text/css">
+.text_link{
+font-size: 150%;
+
+
+}
+.menu{
+font-size: 200%;
+
+}
+#loginButton{
+width: 100%;
+border: 1;
+font-family: 맑은 고딕;
+background-color: white;
+color black;
+}
+
+#div_notice{
+  width:40%;
+	    height:100%;
+	    margin-top: none;
+	    margin-bottom:3%;
+  		padding-top: none;
+  		padding-bottom:  none;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		padding-left:5%;
+  		padding-right:5%;
+  		border: 1px solid black;
+
+}
+#div_board{
+
+  width:40%;
+	    height:100%;
+	    margin-top:none;
+	    margin-bottom: 3%;
+  		padding-top: none;
+  		padding-bottom:  none;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+#imageContents{
+ width:40%;
+	    height:100%;
+	    margin-top:none;
+	    margin-bottom: 3%;
+  		padding-top: none;
+  		padding-bottom:  none;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
 
 </style>
 </head>
 
 <body>
+<script type="text/javascript">
+function loginButton(){
+	location.href="../home/loadLogin.html";
+}
+</script>
 	
 	<div data-role="page">	
 		<div data-role="header"> <!-- 로고, 로그인 메뉴 -->
@@ -28,7 +91,7 @@
 					<td>
 						<c:choose>
 							<c:when test="${sessionScope.LOGINMEMBER == null }">
-									<a href="../home/loadLogin.html">로그인</a>
+									<button id="loginButton" onclick="loginButton();">로그인</button>
 							</c:when>
 							<c:otherwise>
 								<jsp:include page="${LOGINRESULT }"></jsp:include>
@@ -59,10 +122,10 @@
 		<div id="content" align="center">
 			<c:choose>
 				<c:when test="${BODY == null }">
-			<div><!-- 첫번째 이미지 슬라이드와 그 소개 -->
+			<div id="imageContents"><!-- 첫번째 이미지 슬라이드와 그 소개 -->
 				<table>
 					<tr>
-						<td>#TOP5 작가님들 작품</td>
+						<td><div class="menu"> #TOP5 작가님들 작품 </div></td>
 						
 						
 					</tr>
@@ -74,7 +137,7 @@
 						
 								<c:forEach items="${TOP5_LIST }" var="top">
 								<a href="../home/loadSeries.html?novelId=${top.id }">
-								<img alt="" src="../upload/${top.image }" width="200" height="300"  >
+								<img alt="" src="../upload/${top.image }" width="100" height="150"  >
 								</a>
 								</c:forEach>
 						
@@ -91,7 +154,7 @@
 						<c:if test="${! empty TOP10_LIST }">
 								<c:forEach items="${TOP10_LIST }" var="top2">
 								<a href="../home/loadSeries.html?novelId=${top2.id }">
-								<img alt="" src="../upload/${top2.image }" width="200" height="300"  >
+								<img alt="" src="../upload/${top2.image }" width="100" height="150"  >
 								</a>
 								</c:forEach>
 						
@@ -100,28 +163,49 @@
 					</tr>
 				</table>
 			</div>
-			<div>
-			<c:if test="${! empty NOTICE_LIST }">
-			<table>
+			
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$(".noticeContent").hide();
+			});
+			
+			function notice_content(noticeId) {
+				
+				$("#"+noticeId).show();
+			}
+			</script>
+			
+			<div id="div_notice">
+			<c:if test="${! empty NOTICE_LIST }">			
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<td><div class="menu">#공지사항</div></td>
+				</tr>
+				<tr>
+					<th>제목</th><th>작성자</th><th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
 				<c:forEach items="${NOTICE_LIST }" var="notice"> 
 					<tr>
-						<td><a href="">${notice.title }</a></td>
+						<td><a id="notice" href="#notice" onclick="notice_content(${notice.bno });">${notice.title }</a></td>
 						<td>${notice.nickname }</td>
 						<td>${notice.regi_date }</td>
 					</tr>
-					<tr>
-						<td>
-						${notice.content }
-						</td>
-					</tr>
+				
 				</c:forEach>
+			</tbody>
 			</table>
+			<div align="left" class="text_link"><a href="../home/loadNotice.html">more...</a></div>
 			</c:if>
 			</div>
-			<div><!-- 연재게시판 -->
+			
+			
+			<div id="div_board" align="center"><!-- 연재게시판 -->
 				<table>
 					<tr>
-						<td>#연재 게시판</td>
+						<td><div align="left" class="menu">#연재 게시판</div></td>
 					</tr>
 					<tr>
 						<td>
@@ -136,12 +220,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<a href="../home/goMain.html">전체</a>
-							<a href="../home/goMain.html?novelType=판타지">판타지</a>
-							<a href="../home/goMain.html?novelType=무협">무협</a>
-							<a href="../home/goMain.html?novelType=로맨스">로맨스</a>
+						<td><div class="text_link">
+							<a href="../home/goMain.html">전체</a>&nbsp;&nbsp;
+							<a href="../home/goMain.html?novelType=판타지">판타지</a>&nbsp;&nbsp;
+							<a href="../home/goMain.html?novelType=무협">무협</a>&nbsp;&nbsp;
+							<a href="../home/goMain.html?novelType=로맨스">로맨스</a>&nbsp;&nbsp;
 							<a href="../home/goMain.html?novelType=기타">기타</a>
+						</div>
 						</td>						
 				
 					</tr>
@@ -166,9 +251,7 @@
 							<tr><td>문의전화: 010-7159-2578</td></tr>
 						</table>
 					</td>
-					<td>
-						<a href="../home/loadNotice.html">공지사항</a>
-					</td>
+				
 				</tr>
 			</table>
 		</div>

@@ -8,6 +8,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+#seriesList{
+   width:35%;
+	    height:100%;
+	    
+	    margin-bottom: 10%;
+  		
+  		padding-bottom: 5%;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+
+#seriesList2{
+   width:35%;
+	    height:100%;
+	    margin-top:5%;
+	
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+#novelTitle{
+font-size: 300%;
+
+}
+</style>
 </head>
 <body>
 
@@ -15,21 +45,28 @@
 아직 에피소드가 없습니다
 </c:if>
 <c:if test="${ ! empty EPI_LIST }">
-		${parentNovel.title }&nbsp;
+<div id="seriesList2">
+
+		<div id="novelTitle" align="left">${parentNovel.title }</div>&nbsp;
 		<c:if test="${sessionScope.LOGINMEMBER != null }">
 		<a href="../novel/favorite.html?novelId=${parentNovel.id }">선호작 등록</a>
 		</c:if>
 		<br/>
-		글 : ${parentNovel.nickname }<br/>
-		총 회차:  ${parentNovel.episode }회 
-		<c:if test="${parentNovel.finish =='yes' }">완결!!!</c:if>
+		글 : <strong>${parentNovel.nickname }</strong><br/>
+		총 회차: <strong> ${parentNovel.episode }</strong>회 
+		</div>
+			
+		
+		<div id="seriesList">
+<%-- 		<c:if test="${parentNovel.finish =='yes' }">완결!!!</c:if> --%>
+		<div align="left">
 		<table >
 			<tr>
 				<td><img alt="" src="../upload/${parentNovel.image }" width="100" height="150"></td>
 				<td>${parentNovel.description }</td>
 			</tr>
 		</table>
-
+		</div>
 <c:set var="startPage" value="${currentPage-(currentPage%10 == 0?10:(currentPage%10))+1}"/>
 <c:set var="endPage" value="${startPage + 9 }"/>
 <c:if test="${endPage > pageCount }">
@@ -97,7 +134,7 @@
 
 <a href="../home/loadSeries.html?pageNo=${pageCount}&novelId=${novelId }">[마지막]</a>
 
-
+</div>
 </c:if>
 
 

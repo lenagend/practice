@@ -8,22 +8,55 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#loginFormDiv{
+   width:35%;
+	    height:100%;
+	    margin-top:5%;
+	    margin-bottom: 30%;
+  		padding-top: 20%;
+  		padding-bottom: 5%;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+.input{
 
+  width:300px;
+  height:50px;
+  font-size:150%;
+  font-family: Malgun Gothic;
+ 
+}
+
+.button{
+ width:300px;
+  height:50px;
+  font-family: Malgun Gothic;
+ background-color: #66CCFF;
+ font-size:150%;
+ color: #003399;
+}
+
+
+
+</style>
 </head>
 <body>
-	<div>회원가입</div>
-	<div>
+	
+	<div id="loginFormDiv">
 		<form:form modelAttribute="member" action="../login/doRegi.html" method="post">
 			
 			<table>
 				<tr>
 					<td>
-						<form:input path="email" value="${authEmail }" readonly="true"/>
+						<form:input class="input" path="email" value="${authEmail }" readonly="true"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<form:password path="password" placeholder="비밀번호" id="pwd"/>
+						<form:password class="input" path="password" placeholder="비밀번호" id="pwd"/>
 					</td>
 				</tr>
 				<tr>
@@ -33,7 +66,7 @@
 				</tr>
 				<tr>
 					<td>
-						<form:password path="rePwd" placeholder="비밀번호 확인" />
+						<form:password class="input" path="rePwd" placeholder="비밀번호 확인" />
 					</td>
 				</tr>
 				<tr>
@@ -43,7 +76,7 @@
 				</tr>
 				<tr>
 					<td>
-						<form:input path="nickname" placeholder="닉네임" />
+						<form:input class="input" path="nickname" placeholder="닉네임" />
 					</td>
 				</tr>
 				<tr>
@@ -53,7 +86,7 @@
 				</tr>
 				<tr>
 					<td>
-						<form:input path="phone" placeholder="휴대전화"/>
+						<form:input class="input" path="phone" placeholder="휴대전화"/>
 					</td>
 				</tr>
 				<tr>
@@ -62,7 +95,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="회원가입" id="reg_submit"/></td>
+					<td><input type="submit" value="회원가입" class="button"/></td>
 				</tr>
 			</table>
 			

@@ -25,7 +25,6 @@ color: #cc0000;
 
 
 
-
 </style>
 </head>
 <body>
@@ -43,16 +42,9 @@ color: #cc0000;
 	<c:set var="endPage" value="${pageCount }"/>
 </c:if>
 
-
+<div id="board" align="center">
+	
 	<table>
-		<tr>
-			<td>
-				<c:if test="${currentPage > 1 }">
-						<a href="../home/goMain.html?pageNo=${currentPage -1 }">[이전]</a>
-				</c:if>
-			</td>
-				<td>
-					<table>
 		<c:forEach items="${NOVEL_LIST }" var="cnt">
 		
 			<tr>
@@ -83,17 +75,15 @@ color: #cc0000;
 			
 		</c:forEach>
 	</table>
-				</td>
-				<td>
-				<c:if test="${currentPage < pageCount }">
+
+
+		<br/>
+		<c:if test="${currentPage > 1 }">
+						<a href="../home/goMain.html?pageNo=${currentPage -1 }">[이전]</a>
+		</c:if>
+		<c:if test="${currentPage < pageCount }">
 						<a href="../home/goMain.html?pageNo=${currentPage +1 }">[다음]</a>
-				</c:if>
-				</td>
-			</tr>
-
-	</table>
-
-
+		</c:if>
 		<br/>
 
 <c:if test="${startPage > 10 }">
@@ -125,7 +115,7 @@ color: #cc0000;
 
 <br/>
 
-
+</div>
 </c:if>
 </body>
 </html>

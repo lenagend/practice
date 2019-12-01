@@ -7,23 +7,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+
+#loginFormDiv{
+   width:35%;
+	    height:100%;
+	    margin-top:5%;
+	    margin-bottom: 30%;
+  		padding-top: 20%;
+  		padding-bottom: 5%;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+
+.input{
+
+  width:300px;
+  height:50px;
+  font-size:150%;
+  font-family: Malgun Gothic;
+ 
+}
+
+.button{
+ width:300px;
+  height:50px;
+  font-family: Malgun Gothic;
+ background-color: #66CCFF;
+ font-size:150%;
+ color: #003399;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
+	
+	<div id="loginFormDiv">
 	<div>계정 찾기</div>
-	<div>
 		<form action="../login/findEmail.html" method="post">
-			<input type="hidden" name="findEmailTokken" id="findEmailTokken" value="${findEmailTokkenMsg }"/>
+			<input class="input" type="hidden" name="findEmailTokken" id="findEmailTokken" value="${findEmailTokkenMsg }"/>
 			<table>
 				<tr>
-					<td><input type="number" name="phone" /></td>
+					<td><input class="input" type="number" name="phone" /></td>
 				</tr>
 				<tr>
 					<td><font color="gray">비밀번호는 가입 이메일로 자동 전송됩니다</font></td>
 				</tr>
 
 				<tr>
-					<td><input type="submit" value="확인" /></td>
+					<td><input class="button" type="submit" value="확인" /></td>
 				</tr>
 
 

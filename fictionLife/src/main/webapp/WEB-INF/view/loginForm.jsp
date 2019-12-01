@@ -7,21 +7,69 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+  
+<title>로그인</title>
+<style type="text/css">
+
+
+#loginFormDiv{
+   width:35%;
+	    height:100%;
+	    margin-top:5%;
+	    margin-bottom: 30%;
+  		padding-top: 20%;
+  		padding-bottom: 5%;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+
+.input{
+
+  width:300px;
+  height:50px;
+  font-size:150%;
+  font-family: Malgun Gothic;
+ 
+}
+
+.button{
+ width:300px;
+  height:50px;
+  font-family: Malgun Gothic;
+ background-color: #66CCFF;
+ font-size:150%;
+ color: #003399;
+}
+
+#text_link{
+
+
+  font-size:150%;
+	font-family: Malgun Gothic;
+	color: black;
+}
+
+
+
+</style>
 </head>
 <body>
 	<c:if test="${! empty LOGINMEMBER }">
 	이미 로그인 되어있습니다. 새로고침해 보세요
 	</c:if>
+	
+	<div id="loginFormDiv" align="center">
 	<c:if test="${ empty LOGINMEMBER }">
-	<div>로그인</div>
-	<div>
+	
+	
 		<form:form modelAttribute="member" action="../login/login.html">
 			
-			<table>
+			<table >
 				<tr>
 					<td>
-						<form:input path="email"/>
+						<form:input path="email" class="input" maxlength="30"/>
 					</td>
 				</tr>
 				<tr>
@@ -31,7 +79,7 @@
 				</tr>
 				<tr>
 					<td>
-						<form:password path="password"/>
+						<form:password path="password" class="input" maxlength="15"/>
 					</td>
 				</tr>
 				<tr>
@@ -39,19 +87,31 @@
 						<font color="red"><form:errors path="password"/></font>
 					</td>
 				</tr>
-				<tr>
-					<td><input type="submit" value="로그인"/></td>
+				<tr align="center">
+					<td align="center"><input class="button" type="submit" value="로그인"/></td>
 				</tr>
 			</table>
-			<table>
+			<table >
 				<tr>
-					<td></td>
-					<td><a href="../home/loadEmail.html">회원가입</a></td>
-					<td><a href="../home/loadFindEmail.html">계정찾기</a></td>
+				<td><a id="text_link" href="../home/loadFindEmail.html">계정찾기</a></td>
 				</tr>
+			
+				<tr align="center">
+					<td align="center"><input  class="button" type="button" value="회원가입" onclick="register();"></td>
+					
+				</tr>
+			
 			</table>
 		</form:form>
-	</div>
+	
 	</c:if>
+	</div>
+	<script type="text/javascript">
+	
+	function register(){
+		location.href="../home/loadEmail.html";
+		
+	}
+	</script>
 </body>
 </html>

@@ -8,20 +8,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+
+#loginFormDiv{
+   width:35%;
+	    height:100%;
+	    margin-top:5%;
+	    margin-bottom: 30%;
+  		padding-top: 20%;
+  		padding-bottom: 5%;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+
+.input{
+
+  width:300px;
+  height:50px;
+  font-size:150%;
+  font-family: Malgun Gothic;
+ 
+}
+
+.button{
+ width:300px;
+  height:50px;
+  font-family: Malgun Gothic;
+ background-color: #66CCFF;
+ font-size:150%;
+ color: #003399;
+}
+</style>
+<title>인증번호 확인</title>
 </head>
 <body>
-	<div>인증번호를 입력해주세요</div>
-	<div>
+	
+	<div id="loginFormDiv">
 		
-			
+			인증번호를 입력해주세요
 			<form:form modelAttribute="emailCondition" action="../login/emailResult.html">
 			<form:hidden path="email" />
 			<form:hidden path="dice"/>
 			<table>
 				<tr>
 					<td>
-						<form:input path="userInput"/>
+						<form:input class="input" path="userInput"/>
 					</td>
 				</tr>
 				<tr>
@@ -30,7 +63,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="확인"/></td>
+					<td><input class="button" type="submit" value="확인"/></td>
 				</tr>
 			</table>
 			</form:form>
