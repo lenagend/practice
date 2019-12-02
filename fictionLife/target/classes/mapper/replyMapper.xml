@@ -21,7 +21,7 @@ select * from
 </select>
 
 <select id="countReplyByBno" resultType="Integer">
-select count(*) from reply_novel where bno = #{bno}
+select count(*) from reply_novel where bno = #{bno} and parent_no = 0
 </select>
 
 <update id="addReplCnt">
