@@ -13,7 +13,7 @@
 <body>
 <a href="../home/loadModifyMember.html">개인정보수정</a>
 <a href="../home/loadMyPage.html">내 작품</a>
-<a href="../home/loadMyPage2.html">선호작</a>
+<a href="../home/loadMyPage2.html">관심작품</a>
 
 
 <c:if test="${CONTENTNAME == 'MYFAVORITE' }">

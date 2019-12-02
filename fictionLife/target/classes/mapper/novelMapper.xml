@@ -306,7 +306,7 @@ select count(*) from novel where id=#{value} and finish ='yes'
 <select id="countSearchNovel" resultType="Integer">
 
 
-select count(*) from novel where blind='no' and episode !=0 and title like '%'||#{search}||'%'
+select count(*) from novel where blind='no' and episode !=0 and title like '%'||#{search}||'%' or nickname =#{search}
 </select>
 
 <select id="getSearchNovel" resultType="model.Novel">
@@ -315,7 +315,7 @@ select count(*) from novel where blind='no' and episode !=0 and title like '%'||
 	select a.*, rownum rn from(
 		
 	 (select * from Novel where  blind = 'no' and episode != 0 and email in(select email from member where blind='no') 
-	and  title like '%'||#{search}||'%'	
+	and  title like '%'||#{search}||'%'	or nickname  =#{search}
 order by epi_regi_date desc)a
 	)
 )where rn between #{startRow} and #{endRow}

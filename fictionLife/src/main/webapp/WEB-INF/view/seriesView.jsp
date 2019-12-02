@@ -52,14 +52,16 @@ font-size: 300%;
 		<a href="../novel/favorite.html?novelId=${parentNovel.id }">선호작 등록</a>
 		</c:if>
 		<br/>
+		<div align="left">
 		글 : <strong>${parentNovel.nickname }</strong><br/>
 		총 회차: <strong> ${parentNovel.episode }</strong>회 
+		</div>
 		</div>
 			
 		
 		<div id="seriesList">
 <%-- 		<c:if test="${parentNovel.finish =='yes' }">완결!!!</c:if> --%>
-		<div align="left">
+		<div align="center">
 		<table >
 			<tr>
 				<td><img alt="" src="../upload/${parentNovel.image }" width="100" height="150"></td>
@@ -77,7 +79,7 @@ font-size: 300%;
 		<table>
 			<tr>
 				<td><c:if test="${currentPage > 1 }">
-						<a href="../home/loadSeries.html?pageNo=${currentPage -1 }&novelId=${novelId }">[이전]</a>
+						<a href="../home/loadSeries.html?pageNo=${currentPage -1 }&novelId=${novelId }"><img alt="" src="../cssImage/prev.png" width="48" height="48"></a>
 					</c:if></td>
 				<td>
 					<table>
@@ -88,9 +90,9 @@ font-size: 300%;
 							<tr>
 								<td>${epi.epi_number }화-</td>
 								<td><font size="6"><a href="../home/loadReader.html?epi_number=${epi.epi_number }&pni=${parentNovel.id}&bno=${epi.bno}">${epi.epi_title }</a></font></td>
-								<td>조회수:${epi.view_cnt } </td>
-								<td>추천수:${epi.reco_cnt } </td>
-								<td>댓글수:${epi.repl_cnt }</td>
+								<td><img alt="" src="../cssImage/view.jpg" width="16" height="16"> ${epi.view_cnt } </td>
+								<td><img alt="" src="../cssImage/likey.png" width="16" height="16">${epi.reco_cnt } </td>
+								<td><img alt="" src="../cssImage/comment.png" width="16" height="16">${epi.repl_cnt }</td>
 								<c:if test="${sessionScope.LOGINMEMBER.email == parentNovel.email }">
 								<td><a href="../novel/loadModifyEpiForm.html?epiNumber=${epi.epi_number }&parentNovelId=${parentNovel.id}">수정</a></td>
 								</c:if>								
@@ -99,7 +101,7 @@ font-size: 300%;
 					</table>
 				</td>
 				<td><c:if test="${currentPage < pageCount }">
-						<a href="../home/loadSeries.html?pageNo=${currentPage +1 }&novelId=${novelId }">[다음]</a>
+						<a href="../home/loadSeries.html?pageNo=${currentPage +1 }&novelId=${novelId }"><img alt="" src="../cssImage/next.png" width="48" height="48"></a>
 					</c:if></td>
 			</tr>
 		</table>
@@ -134,6 +136,15 @@ font-size: 300%;
 
 <a href="../home/loadSeries.html?pageNo=${pageCount}&novelId=${novelId }">[마지막]</a>
 
+<br/>
+<br/>
+<a href="#" onclick="goNovel_board();">목록으로</a>
+<script type="text/javascript">
+function goNovel_board() {
+	var url = '${redirectURI}';
+	location.replace(url);
+}
+</script>
 </div>
 </c:if>
 

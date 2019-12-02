@@ -403,13 +403,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/home/loadSeries.html")
-	public ModelAndView loadSeries(Integer novelId, Integer pageNo) {
+	public ModelAndView loadSeries(Integer novelId, Integer pageNo, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
+		request.getSession().setAttribute("redirectURI", referer);	
+		
 		ModelAndView mav = new ModelAndView("main");
 	
-		
-		
-		
-		
 		
 		//
 		Integer cnt = sn.getEpiCount(novelId);
@@ -451,7 +450,11 @@ public class HomeController {
 	}
 	@RequestMapping(value="/home/loadReader.html")
 	public ModelAndView loadReader(Integer epi_number, 
-			Integer pni, Integer bno, Integer pageNo) {
+			Integer pni, Integer bno, Integer pageNo, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
+		request.getSession().setAttribute("redirectURI", referer);	
+		
+		
 		Novel_board nb = new Novel_board();
 		nb.setEpi_number(epi_number);
 		nb.setNovel_id(pni);
@@ -477,9 +480,9 @@ public class HomeController {
 		
 		if(cnt>0) {
 			pageCnt = cnt/10;
-			if(cnt % 10>0) pageCnt++;
-			startRow = (currentPage-1)*10 +1;
-			endRow = currentPage * 10;
+			if(cnt % 5>0) pageCnt++;
+			startRow = (currentPage-1)*5 +1;
+			endRow = currentPage * 5;
 			
 			if(endRow > cnt) endRow = cnt;
 			

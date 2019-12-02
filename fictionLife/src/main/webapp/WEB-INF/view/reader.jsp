@@ -22,6 +22,14 @@
   		border: 1px solid black;
 }
 
+#replTable{
+border: 1px solid black;
+background-color: silver;
+}
+#reReplTable{
+border: 1px solid black;
+background-color: gray;
+}
 </style>
 </head>
 <body>
@@ -54,14 +62,25 @@
 	
 	<tr>
 	<td>
-	<a href="../home/loadSeries.html?novelId=${parentNovel.id }">목록으로</a>
+	<a href="#" onclick=" goSeries();">목록으로</a>
+	<script type="text/javascript">
+	function goSeries() {
+		var url = '${redirectURI}';
+		location.replace(url);
+	}	
+	
+	</script>
+	
+	
+	
+	
 	
 	<c:if test="${sessionScope.LOGINMEMBER != null }"><!-- 로그인 유저만 -->
 		
 		
-		<a href="../novel/favorite.html?novelId=${parentNovel.id }&writer=${parentNovel.email}">선호작 등록</a>
-		<a href="../novel/likey.html?bno=${EPISODE.bno }&writerEmail=${parentNovel.email}&pni=${parentNovel.id}&epi_number=${EPISODE.epi_number}">추천</a>
-		<a href="#reportForm" onclick="reportForm();">신고하기</a>
+		<a href="../novel/favorite.html?novelId=${parentNovel.id }&writer=${parentNovel.email}">관심작품</a>
+		<a href="../novel/likey.html?bno=${EPISODE.bno }&writerEmail=${parentNovel.email}&pni=${parentNovel.id}&epi_number=${EPISODE.epi_number}">좋아요</a>
+		<a href="#reportForm" onclick="reportForm();">신고</a>
 		<div id="reportForm">
 		<form action="../novel/report.html?bno=${EPISODE.bno }" method="post">
 		신고하기
@@ -100,7 +119,7 @@
 		<table>
 			<tr>
 				<td><c:if test="${currentPage > 1 }">
-						<a href="../home/loadReader.html?pageNo=${currentPage -1 }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}">[이전]</a>
+						<a href="../home/loadReader.html?pageNo=${currentPage -1 }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}"><img alt="" src="../cssImage/prev.png" width="48" height="48"></a>
 					</c:if></td>
 				<td>
 				
@@ -110,23 +129,28 @@
 							
 
 							<tr>
-								<td><img alt="" src="../rank_icon/${re.r_icon_image }" width="32" height="32">	${re.nickname}</td>
-								<td>${re.regi_date}</td>
 								<td>
-								<c:if test="${sessionScope.LOGINMEMBER.nickname == re.nickname }">
-								<a id="deleteRepl" href="#deleteRepl" onclick="deleteRepl(${re.rno});" >삭제</a>
-								</c:if>
-								</td>
-								<td><a href="#reReplyForm" onclick="reReplyForm(${re.rno});">답글(${re.repl_cnt }개) </a></td>							
-							</tr>
-							<tr>
-								<td>${re.content }</td>
-							</tr>
-							<tr>
-							
-							
-							<td>
+									<table id="replTable">
+										<tr>
+											<td><img alt="" src="../rank_icon/${re.r_icon_image }" width="32" height="32">	${re.nickname}
+											${re.regi_date}
+											
+											<c:if test="${sessionScope.LOGINMEMBER.nickname == re.nickname }">
+											<a id="deleteRepl" href="#deleteRepl" onclick="deleteRepl(${re.rno});" >삭제</a>
+											</c:if>
+											
+											<a href="#reReplyForm" onclick="reReplyForm(${re.rno});">답글(${re.repl_cnt }개) </a></td>							
+										</tr>
+										<tr>
+											<td>${re.content }<br></td>
+										</tr>	
+										<tr>
+											<td>
 									<div id="${re.rno }" class="reReplyForm">
+								<table id="reReplTable">
+									<tr>
+										<td>
+									
 									<c:if test="${sessionScope.LOGINMEMBER != null }">
 										<form action="../reply/reReply.html" method="post">
 											<input type="hidden" name="epi_number"
@@ -139,37 +163,53 @@
 											<input	type="submit" value="확인">
 										</form>
 										</c:if>
+										
+											</td>
+									</tr>
+									<tr>
+											<td>
 										<table>
 										<c:forEach var="rere" items="${REREPLY_LIST }">
 											<c:if test="${rere.parent_no == re.rno }">
 												<tr>
-													<td>&nbsp;ㄴ<img alt="" src="../rank_icon/${rere.r_icon_image }" width="32" height="32">${rere.nickname}</td>
-													<td>${rere.content}</td>
-													
-													<td>
+													<td>&nbsp;ㄴ<img alt="" src="../rank_icon/${rere.r_icon_image }" width="32" height="32">${rere.nickname}
+													${rere.regi_date}					
 													<c:if test="${sessionScope.LOGINMEMBER.nickname == rere.nickname }">
 													<a id="deleteReRepl" href="#deleteReRepl" onclick="deleteRepl(${rere.rno});" >삭제</a>
 													</c:if>
 													</td>
 												</tr>
 												<tr>
-													<td>${rere.regi_date}</td>
+													<td align="center">${rere.content}</td>
 												</tr>
 											</c:if>
 										</c:forEach>
 										</table>
-
-									</div>
+						
+									
+										</td>
+									</tr>
+								</table>
+								
+								
+								<br/>
+								</div>
+											</td>
+										</tr>
+									</table>
+									
+									<br/>
+									
+									
 								</td>
-								
-								
 							</tr>
+						
 						</c:forEach>
 					</table>
 					
 				</td>
 				<td><c:if test="${currentPage < pageCount }">
-						<a href="../home/loadReader.html?pageNo=${currentPage +1 }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}">[다음]</a>
+						<a href="../home/loadReader.html?pageNo=${currentPage +1 }&epi_number=${EPISODE.epi_number}&pni=${parentNovel.id}&bno=${EPISODE.bno}"><img alt="" src="../cssImage/next.png" width="48" height="48"></a>
 					</c:if></td>
 			</tr>
 		</table>

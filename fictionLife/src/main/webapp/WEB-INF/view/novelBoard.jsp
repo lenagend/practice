@@ -48,7 +48,14 @@ location.replace("../home/goMain.html");
 </c:if>
 
 <div id="board" align="center">
-	
+	<table>
+	<tr>
+	<td>
+		<c:if test="${currentPage > 1 }">
+						<a href="../home/goMain.html?pageNo=${currentPage -1 }"><img alt="" src="../cssImage/prev.png" width="48" height="48"></a>
+		</c:if>
+	</td>
+	<td>
 	<table>
 		<c:forEach items="${NOVEL_LIST }" var="cnt">
 		
@@ -69,7 +76,8 @@ location.replace("../home/goMain.html");
 							<td>
 								<img alt="" src="../rank_icon/${cnt.w_icon_image}" width="16" height="16">
 							
-								${cnt.nickname } 작가님&nbsp;<span id="Text_upload">${cnt.episode }화 업로드!!</span>&nbsp;선호작${cnt.favorite_num }회 등록
+								${cnt.nickname } 작가님&nbsp;<span id="Text_upload">${cnt.episode }화 업로드!!</span>
+								&nbsp;<img alt="" src="../cssImage/star.png" width="16" height="16">${cnt.favorite_num } 
 							</td>
 						
 						</tr>
@@ -80,18 +88,22 @@ location.replace("../home/goMain.html");
 			
 		</c:forEach>
 	</table>
+	</td>
+	<td>
+		<c:if test="${currentPage < pageCount }">
+						<a href="../home/goMain.html?pageNo=${currentPage +1 }"><img alt="" src="../cssImage/next.png" width="48" height="48"></a>
+		</c:if>
+	</td>
+	</tr>
+	</table>
 	<form action="../home/goMain.html">
 	<input type="text" name="search" maxlength="15">
 	<input type="submit" value="검색">
 	</form>
 
 		<br/>
-		<c:if test="${currentPage > 1 }">
-						<a href="../home/goMain.html?pageNo=${currentPage -1 }">[이전]</a>
-		</c:if>
-		<c:if test="${currentPage < pageCount }">
-						<a href="../home/goMain.html?pageNo=${currentPage +1 }">[다음]</a>
-		</c:if>
+		
+		
 		<br/>
 
 <c:if test="${startPage > 10 }">

@@ -59,7 +59,7 @@ color black;
   		
   		border: 1px solid black;
 }
-#imageContents{
+.imageContents{
  width:40%;
 	    height:100%;
 	    margin-top:none;
@@ -122,7 +122,7 @@ function loginButton(){
 		<div id="content" align="center">
 			<c:choose>
 				<c:when test="${BODY == null }">
-			<div id="imageContents"><!-- 첫번째 이미지 슬라이드와 그 소개 -->
+			<div class="imageContents"><!-- 첫번째 이미지 슬라이드와 그 소개 -->
 				<table>
 					<tr>
 						<td><div class="menu"> #TOP5 작가님들 작품 </div></td>
@@ -134,35 +134,63 @@ function loginButton(){
 						<c:if test="${! empty TOP5_LIST  }">
 						
 					
-						
+						<table>
+								<tr>
+								<td><img alt="" src="../cssImage/crown1.png"></td>
+								<td><img alt="" src="../cssImage/crown2.png"></td>
+								<td><img alt="" src="../cssImage/crown3.png"></td>
+								<td><img alt="" src="../cssImage/crown4.png"></td>
+								<td><img alt="" src="../cssImage/crown5.png"></td>
+								</tr>
+								<tr>
 								<c:forEach items="${TOP5_LIST }" var="top">
+								
+								
+								<td>
 								<a href="../home/loadSeries.html?novelId=${top.id }">
 								<img alt="" src="../upload/${top.image }" width="100" height="150"  >
 								</a>
-								</c:forEach>
+								</td>
+								
+									</c:forEach>
+									</tr>
+								</table>
+							
 						
 							</c:if>
 						</td>
 							
 					</tr>
+					</table>
+					</div>
+					<div class="imageContents">
+					<table>
+					<tr>
+						<td><div class="menu"> #오늘 추천수 TOP5 </div></td>
+					</tr>
 					<tr>
 						<td align="center">
-						<c:if test="${ empty TOP10_LIST }">
-						오늘 추천받은 글이 없습니다 ㅠ
-						</c:if>
-						
-						<c:if test="${! empty TOP10_LIST }">
+							<table>
+								<tr>
+									<td><img alt="" src="../cssImage/crown1.png"></td>
+								<td><img alt="" src="../cssImage/crown2.png"></td>
+								<td><img alt="" src="../cssImage/crown3.png"></td>
+								<td><img alt="" src="../cssImage/crown4.png"></td>
+								<td><img alt="" src="../cssImage/crown5.png"></td>
+								</tr>
+								<tr>
 								<c:forEach items="${TOP10_LIST }" var="top2">
+								<td>
 								<a href="../home/loadSeries.html?novelId=${top2.id }">
-								<img alt="" src="../upload/${top2.image }" width="100" height="150"  >
-								</a>
+								<img alt="" src="../upload/${top2.image }" width="100" height="150"  ></a>
+								</td>
 								</c:forEach>
-						
-						</c:if>
+								</tr>
+							</table>
 						</td>
 					</tr>
 				</table>
-			</div>
+				</div>
 			
 		
 			
