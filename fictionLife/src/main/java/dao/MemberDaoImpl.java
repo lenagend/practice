@@ -40,4 +40,14 @@ public Integer adminLogin(String email) {
 	
 	return session.selectOne(MAPPER+"adminLogin", email);
 }
+
+public void modifyMember(Member member) {
+	session.update(MAPPER+"modifyMember", member);
+	
+}
+
+public void quitMember(String email) {
+	session.update(MAPPER+"quitMember", email);
+	
+}
 }

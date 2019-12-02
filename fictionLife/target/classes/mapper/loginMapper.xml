@@ -29,6 +29,15 @@ select * from member where phone=#{value}
 select count(*) from admin where email=#{email}
 </select>
 
+<update id="modifyMember">
+update member set password =#{password} where email = #{email}
+</update>
+
+<update id="quitMember">
+
+update member set blind = 'yes' where email = #{email}
+</update>
+
 </mapper>
 
 

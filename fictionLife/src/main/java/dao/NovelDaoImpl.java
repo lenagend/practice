@@ -270,4 +270,13 @@ public class NovelDaoImpl implements NovelDao {
 
 		return session.selectList("mapper.novelMapper.findTop10NovelByReco_cnt");
 	}
+	public Integer countSearchNovel(String search) {
+		
+		return session.selectOne("mapper.novelMapper.countSearchNovel", search);
+	}
+	
+	public List<Novel> getSearchNovel(PagingCondition pc) {
+		
+		return session.selectList("mapper.novelMapper.getSearchNovel",pc);
+	}
 }

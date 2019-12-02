@@ -398,11 +398,7 @@ public class NovelController {
 	}
 
 	
-	
-	
-	
-	
-	
+
 	
 	
 	

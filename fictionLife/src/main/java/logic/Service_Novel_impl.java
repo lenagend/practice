@@ -267,4 +267,13 @@ public class Service_Novel_impl implements Service_Novel {
 	
 		return nv.findTop10NovelByReco_cnt();
 	}
+	
+	public Integer countSearchNovel(String search) {
+		return nv.countSearchNovel(search);
+	}
+	
+	public List<Novel> getSearchNovel(PagingCondition pc) {
+		// TODO Auto-generated method stub
+		return nv.getSearchNovel(pc);
+	}
 }

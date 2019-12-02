@@ -114,4 +114,16 @@ public interface NovelDao {
 	
 	
 	public List<Novel> findTop10NovelByReco_cnt();
+	
+	public Integer countSearchNovel(String search);
+	
+	public List<Novel> getSearchNovel(PagingCondition pc);
+	
+	
+	
+	
+	
+	
+	
+	
 }

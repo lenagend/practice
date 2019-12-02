@@ -15,4 +15,8 @@ public interface MemberDao {
 	 Member findEmailByPhone(String phone);
 
 	 Integer adminLogin(String email);
+	 
+	 public void modifyMember(Member member);
+	 
+	 public void quitMember(String email);
 }

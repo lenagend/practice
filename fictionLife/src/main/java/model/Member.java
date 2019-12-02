@@ -22,10 +22,26 @@ public class Member {
 	@NotEmpty(message="비밀번호를 입력하세요")
 	//@Size(min=8, max=13, message="비밀번호는 8~13자입니다")
 	private String password;
+	private String newPassword;
 	
 	private String rePwd;
 	
 	private String blind;
+	
+	private String act;
+	public String getAct() {
+		return act;
+	}
+	public void setAct(String act) {
+		this.act = act;
+	}
+	public String getNewPassword() {
+		return newPassword;
+	}
+	
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
 	
 	public String getBlind() {
 		return blind;

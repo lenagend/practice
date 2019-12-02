@@ -132,115 +132,113 @@ public class Service_Member_Impl implements Service_Member {
 			System.out.println("url: "+url);
 			System.out.println("url: "+url);
 			System.out.println("url: "+url);
-			System.out.println("url: "+url);
+			System.out.println("url: " + url);
 			mav.addObject("url", url);
-			return mav;	
-				
-	}else {
-		//로그인 실패시
-	
-		FieldError fe = new FieldError("loginForm.jsp", "email", "이메일과 패스워드를 확인해 주세요");
-		br.addError(fe);		
-		mav.addObject("BODY", "loginForm.jsp");
-		return mav;
-	}
-		
+			return mav;
+
+		} else {
+			// 로그인 실패시
+
+			FieldError fe = new FieldError("loginForm.jsp", "email", "이메일과 패스워드를 확인해 주세요");
+			br.addError(fe);
+			mav.addObject("BODY", "loginForm.jsp");
+			return mav;
+		}
+
 	}
 
 	public void updateRank(User_rank ur) {
-		
-		
+
 		if (ur.getR_point() > 99 && ur.getR_point() < 500) {
 			// 아이콘 업데이트
 			ur.setR_icon_id(4);
 			ur.setReco_point(2);
-			
+
 		} else if (ur.getR_point() >= 500 && ur.getR_point() < 10000) {
 			// 아이콘 업데이트
 			ur.setR_icon_id(6);
 			ur.setReco_point(3);
-			
+
 		} else if (ur.getR_point() >= 10000 && ur.getR_point() < 100000) {
 			// 아이콘 업데이트
 			ur.setR_icon_id(8);
 			ur.setReco_point(4);
-			
+
 		} else if (ur.getR_point() >= 100000 && ur.getR_point() < 1000000) {
 			// 아이콘 업데이트
 			ur.setR_icon_id(10);
 			ur.setReco_point(5);
-			
+
 		} else if (ur.getR_point() >= 1000000 && ur.getR_point() < 10000000) {
 			// 아이콘 업데이트
 			ur.setR_icon_id(12);
 			ur.setReco_point(6);
-			
-		}else if (ur.getR_point() >= 10000000) {
+
+		} else if (ur.getR_point() >= 10000000) {
 			// 아이콘 업데이트
 			ur.setR_icon_id(14);
 			ur.setReco_point(7);
-			
+
 		}
 		if (ur.getW_point() > 99 && ur.getW_point() < 500) {
 			// 아이콘 업데이트
 			ur.setW_icon_id(3);
-					
+
 		} else if (ur.getW_point() >= 500 && ur.getW_point() < 10000) {
 			// 아이콘 업데이트
 			ur.setW_icon_id(5);
-		
-			
+
 		} else if (ur.getW_point() >= 10000 && ur.getW_point() < 100000) {
 			// 아이콘 업데이트
 			ur.setW_icon_id(7);
-		
-			
+
 		} else if (ur.getW_point() >= 100000 && ur.getW_point() < 1000000) {
 			// 아이콘 업데이트
 			ur.setW_icon_id(9);
-		
-			
+
 		} else if (ur.getW_point() >= 1000000 && ur.getW_point() < 10000000) {
 			// 아이콘 업데이트
 			ur.setW_icon_id(11);
-			
-			
-		}else if (ur.getW_point() >= 10000000) {
+
+		} else if (ur.getW_point() >= 10000000) {
 			// 아이콘 업데이트
 			ur.setW_icon_id(13);
-			
-			
+
 		}
-		
+
 		updateReaders(ur);
 
-		
-		
 	}
+
 	public Integer adminLogin(String email) {
-		
+
 		return memberDao.adminLogin(email);
 	}
+
 	public void AddW_point5(String Email) {
-	rankDao.AddW_point5(Email);
-		
+		rankDao.AddW_point5(Email);
+
 	}
-	
-public String getR_icon_ImageByNickname(String nickname) {
-	
+
+	public String getR_icon_ImageByNickname(String nickname) {
+
 		return rankDao.getR_icon_ImageByNickname(nickname);
 	}
 
-public String getW_icon_ImageByNickname(String nickname) {
+	public String getW_icon_ImageByNickname(String nickname) {
 
-	return rankDao.getW_icon_ImageByNickname(nickname);
-}
-	
-	
-	
-	
-	
-	
+		return rankDao.getW_icon_ImageByNickname(nickname);
+	}
+
+	public void modifyMember(Member member) {
+		memberDao.modifyMember(member);
+
+	}
+
+	public void quitMember(String email) {
+		memberDao.quitMember(email);
+
+	}
 	
 	
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +36,7 @@ public class HomeController {
 	private Service_Admin sa;
 
 	@RequestMapping(value="/home/goMain.html")
-	public ModelAndView goMain(Integer pageNo, HttpSession session, String novelType){
+	public ModelAndView goMain(Integer pageNo, HttpSession session, String novelType, String search){
 		//랭크업데이트
 		Member loginMember = (Member)session.getAttribute("LOGINMEMBER");
 		if(loginMember!=null) {
@@ -45,10 +46,14 @@ public class HomeController {
 		//
 		ModelAndView mav = new ModelAndView("main");
 		Integer cnt = 0;
-		if(novelType== null) {
-			cnt = sn.countNovelList();
-		}else {
+		if(novelType!= null) {
 			cnt= sn.countTypeNovelList(novelType);
+		
+		}else if(search!=null){
+		
+			cnt = sn.countSearchNovel(search);
+		}else {
+			cnt = sn.countNovelList();
 		}
 
 
@@ -82,11 +87,22 @@ public class HomeController {
 
 		List<Novel> allNovelList;
 
-		if(novelType==null) {
-			allNovelList = sn.findAllNovel(c);
-		}else {
+		if(novelType!=null) {
 			c.setType(novelType);
 			allNovelList = sn.findNovelByType(c);
+			
+		}else if(search!=null) {
+			c.setSearch(search);
+			allNovelList = sn.getSearchNovel(c);
+			if(allNovelList.isEmpty()) {
+				mav.addObject("searchResult", "noResult");
+			}
+			
+			
+			}
+		
+		else {
+			allNovelList = sn.findAllNovel(c);
 		}
 		
 		//각 닉네임으로 아이콘을 찾아와야한다...
@@ -310,6 +326,26 @@ public class HomeController {
 		return mav;
 	}
 	
+	
+	
+	@RequestMapping(value="/home/loadModifyMember.html")
+	public ModelAndView loadModifyMember(HttpSession session) {
+		ModelAndView mav = new ModelAndView("main");
+		Member loginMember = (Member)session.getAttribute("LOGINMEMBER");
+		String loginEmail = loginMember.getEmail();
+		Member modifyMember = sm.checkEmail(loginEmail); 
+		
+		mav.addObject("BODY", "modifyMemberForm.jsp");
+		mav.addObject("member",modifyMember);
+		
+		return mav;
+	}
+	
+	
+	
+	
+
+	
 	@RequestMapping(value="/home/loadRegiNovel.html")
 	public ModelAndView loadRegiNovel(HttpSession session) {
 		Member loginMember = (Member)session.getAttribute("LOGINMEMBER");
@@ -528,8 +564,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/home/loadNotice.html")
-	public ModelAndView loadNotice(Integer bno, 
-			 Integer pageNo) {
+	public ModelAndView loadNotice( Integer pageNo) {
 		
 		Integer cnt =sa.countNoticeBno();
 		
@@ -568,5 +603,16 @@ public class HomeController {
 		//답글 갯수
 		
 		return mav;
-	};
+	}
+	
+	@RequestMapping(value="/home/loadNoticeReader.html")
+	public ModelAndView loadNoticeReader(String content, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
+		request.getSession().setAttribute("redirectURI", referer);	
+		ModelAndView mav = new ModelAndView("main");
+		mav.addObject("BODY", "noticeReader.jsp");
+		mav.addObject("content", content);
+		return mav;
+		
+	}
 }

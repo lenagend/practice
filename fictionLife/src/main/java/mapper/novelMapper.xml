@@ -302,6 +302,33 @@ update novel set finish = 'yes' where id =#{value}
 select count(*) from novel where id=#{value} and finish ='yes'
 </select>
 
+
+<select id="countSearchNovel" resultType="Integer">
+
+
+select count(*) from novel where blind='no' and episode !=0 and title like '%'||#{search}||'%'
+</select>
+
+<select id="getSearchNovel" resultType="model.Novel">
+ select * from
+(
+	select a.*, rownum rn from(
+		
+	 (select * from Novel where  blind = 'no' and episode != 0 and email in(select email from member where blind='no') 
+	and  title like '%'||#{search}||'%'	
+order by epi_regi_date desc)a
+	)
+)where rn between #{startRow} and #{endRow}
+
+</select>
+
+
+
+
+
+
+
+
 </mapper>
 
 

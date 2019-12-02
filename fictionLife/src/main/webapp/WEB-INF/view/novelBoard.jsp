@@ -28,7 +28,12 @@ color: #cc0000;
 </style>
 </head>
 <body>
-
+<c:if test="${searchResult == 'noResult' }">
+<script type="text/javascript">
+alert("검색 결과가 없습니다");
+location.replace("../home/goMain.html");
+</script>
+</c:if>
 <c:if test="${empty NOVEL_LIST }">
 망한 홈페이진가봅니다 ㅠㅠ  아직 아무도 소설을 등록하지 않았습니다...
 </c:if>
@@ -75,7 +80,10 @@ color: #cc0000;
 			
 		</c:forEach>
 	</table>
-
+	<form action="../home/goMain.html">
+	<input type="text" name="search" maxlength="15">
+	<input type="submit" value="검색">
+	</form>
 
 		<br/>
 		<c:if test="${currentPage > 1 }">

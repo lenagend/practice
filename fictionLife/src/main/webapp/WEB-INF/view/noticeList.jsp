@@ -12,6 +12,22 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+#div_notice{
+  width:40%;
+	    height:100%;
+	    margin-top: none;
+	    margin-bottom:3%;
+  		padding-top: none;
+  		padding-bottom:  none;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		padding-left:5%;
+  		padding-right:5%;
+  		border: 1px solid black;
+
+}
+</style>
 </head>
 <body>
 <c:if test="${empty NOTICE_LIST }">
@@ -19,7 +35,7 @@
 </c:if>
 
 <c:if test="${!empty NOTICE_LIST }">
-
+<div id="div_notice">
 
 
 <c:set var="startPage" value="${currentPage-(currentPage%10 == 0?10:(currentPage%10))+1}"/>
@@ -32,33 +48,29 @@
 	
 					<table class="table table-striped">
 					<tr>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>작성일</td>
+						<th>글 번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
 		<c:forEach items="${NOTICE_LIST }" var="cnt">
 			<c:if test="${cnt.blind != 'yes' }">			
 			<tr>
-			
-				<td>${cnt.title }</td>
+				<td>${cnt.bno }</td>
+				<td><a href="../home/loadNoticeReader.html?content=${cnt.content }">${cnt.title }</a></td>
 				<td>${cnt.nickname }</td>
-				<td>${cnt.regi_date }</td>
-					<c:if test="${LOGINMEMBER.nickname == cnt.nickname }">
-				<td>
+				<td>${cnt.regi_date }
+				<c:if test="${LOGINMEMBER.nickname == cnt.nickname }">
+				
 				
 					<a href="../admin/loadModifyNoticeForm.html?bno=${cnt.bno }&title=${cnt.title}&content=${cnt.content}">수정</a>
-					<br /> <a href="../admin/deleteNotice.html?bno=${cnt.bno }">삭제</a>
+					<a href="../admin/deleteNotice.html?bno=${cnt.bno }">삭제</a>
 					
+					</c:if>
 				</td>
-				</c:if>
+					
 			</tr>
-			<tr>
-				<td>
-					<div id="${cnt.bno }">
-					<textarea readonly="readonly">${cnt.content }</textarea>
-					</div>
-				</td>
-			</tr>
+		
 			</c:if>
 		</c:forEach>
 	</table>
@@ -92,7 +104,7 @@
 
 <a href="../home/loadMyPage.html?pageNo=${pageCount}">[마지막]</a>
 
-
+</div>
 </c:if>
 </body>
 </html>

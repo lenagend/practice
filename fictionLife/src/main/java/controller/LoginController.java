@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import condition.EmailCondition;
 import condition.RankCondition;
 import logic.Service_Member;
-import model.Favorite;
 import model.Icon;
 import model.Member;
 import model.User_rank;
@@ -325,7 +324,53 @@ public class LoginController {
 			return mav;
 		}
 		
-	};
+	}
+	
+	
+	
+	@RequestMapping(value="/login/doMemberModify.html")
+	public ModelAndView doMemberModify(@Valid Member member, BindingResult br) {
+		ModelAndView mav = new ModelAndView("main");
+		String checkPwd = member.getPassword();
+		Member dbMember = sm.checkEmail(member.getEmail());
+		if(br.hasErrors()) { //단순폼체크
+			mav.addObject("BODY", "modifyMemberForm.jsp");
+		
+			return mav;
+		}
+		if(! member.getNewPassword().equals(member.getRePwd())) {
+			//비밀번호 확인 결과 다름
+			FieldError fe = new FieldError("modifyMemberForm.jsp", "newPassword", "비밀번호 값이 일치하지 않습니다");
+			br.addError(fe);
+			mav.addObject("BODY", "modifyMemberForm.jsp");
+			return mav;
+		}
+	
+		if(!checkPwd.equals(dbMember.getPassword())) {
+			
+			FieldError fe = new FieldError("modifyMemberForm.jsp", "password", "비밀번호가 다릅니다");
+			br.addError(fe);		
+			mav.addObject("BODY", "modifyMemberForm.jsp");
+			return mav;
+		}else {
+			if(member.getAct().equals("수정")) {
+				Member newMember = new Member();
+				newMember.setEmail(member.getEmail());
+				newMember.setPassword(member.getNewPassword());
+				sm.modifyMember(newMember);
+				mav.addObject("memberModifyResult", "modify");
+				mav.setViewName("memberModifyResult");
+			}else if(member.getAct().equals("탈퇴")) {
+				sm.quitMember(member.getEmail());
+				mav.addObject("memberModifyResult", "quit");
+				mav.setViewName("memberModifyResult");
+			}
+			
+			
+		}
+		
+		return mav;
+	}
 
 	
 }

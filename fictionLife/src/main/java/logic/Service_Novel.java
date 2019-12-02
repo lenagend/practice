@@ -105,13 +105,20 @@ public interface Service_Novel {
 	public List<Reply_novel> getReREply(PagingCondition pc);
 
 	public void deleteReply(Reply_novel rn);
-	
+
 	public Novel findTop1Novel();
+
 	public Novel findTop2Novel();
+
 	public Novel findTop3Novel();
+
 	public Novel findTop4Novel();
+
 	public Novel findTop5Novel();
 
-	
 	public List<Novel> findTop10NovelByReco_cnt();
+
+	public Integer countSearchNovel(String search);
+
+	public List<Novel> getSearchNovel(PagingCondition pc);
 }

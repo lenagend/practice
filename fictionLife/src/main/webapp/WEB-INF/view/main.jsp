@@ -164,16 +164,7 @@ function loginButton(){
 				</table>
 			</div>
 			
-			<script type="text/javascript">
-			$(document).ready(function(){
-				$(".noticeContent").hide();
-			});
-			
-			function notice_content(noticeId) {
-				
-				$("#"+noticeId).show();
-			}
-			</script>
+		
 			
 			<div id="div_notice">
 			<c:if test="${! empty NOTICE_LIST }">			
@@ -189,7 +180,7 @@ function loginButton(){
 			<tbody>
 				<c:forEach items="${NOTICE_LIST }" var="notice"> 
 					<tr>
-						<td><a id="notice" href="#notice" onclick="notice_content(${notice.bno });">${notice.title }</a></td>
+						<td><a id="notice" href="../home/loadNoticeReader.html?content=${notice.content }">${notice.title }</a></td>
 						<td>${notice.nickname }</td>
 						<td>${notice.regi_date }</td>
 					</tr>
