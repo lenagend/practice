@@ -9,7 +9,8 @@
 </head>
 <body>
 <div>
-<textarea rows="40" cols="90" readonly="readonly">${content }</textarea>
+<span style="font-size: 200%;">#공지사항</span><br/>
+<textarea rows="20" cols="60" readonly="readonly">${content }</textarea>
 <br/>
 <br/>
 <a onclick="goNoticeList();">목록으로</a>

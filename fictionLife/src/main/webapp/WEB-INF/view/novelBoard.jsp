@@ -17,6 +17,10 @@ color: gray;
 #Text_title{
 font-size: 200%;
 }
+#Text_title2{
+font-size: 200%;
+color: #cc0000;
+}
 
 #Text_upload{
 font-size: 110%;
@@ -52,7 +56,7 @@ location.replace("../home/goMain.html");
 	<tr>
 	<td>
 		<c:if test="${currentPage > 1 }">
-						<a href="../home/goMain.html?pageNo=${currentPage -1 }"><img alt="" src="../cssImage/prev.png" width="48" height="48"></a>
+						<a href="../home/goMain.html?pageNo=${currentPage -1 }"><img alt="" src="../cssImage/prev.png" width="32" height="32"></a>
 		</c:if>
 	</td>
 	<td>
@@ -68,7 +72,12 @@ location.replace("../home/goMain.html");
 					<table>
 						<tr>
 							<td>
+								<c:if test="${cnt.finish=='yes' }">
+								<a href="../home/loadSeries.html?novelId=${cnt.id }"><span id="Text_title2">${cnt.title }</span></a>
+								</c:if>
+								<c:if test="${cnt.finish=='no' }">
 								<a href="../home/loadSeries.html?novelId=${cnt.id }"><span id="Text_title">${cnt.title }</span></a>
+								</c:if>
 								&nbsp;<span id="Text_type">장르 : ${cnt.type }</span>
 							</td>
 						</tr>
@@ -91,7 +100,7 @@ location.replace("../home/goMain.html");
 	</td>
 	<td>
 		<c:if test="${currentPage < pageCount }">
-						<a href="../home/goMain.html?pageNo=${currentPage +1 }"><img alt="" src="../cssImage/next.png" width="48" height="48"></a>
+						<a href="../home/goMain.html?pageNo=${currentPage +1 }"><img alt="" src="../cssImage/next.png" width="32" height="32"></a>
 		</c:if>
 	</td>
 	</tr>

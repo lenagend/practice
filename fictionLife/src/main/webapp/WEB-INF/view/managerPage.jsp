@@ -8,11 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+.loginFormDiv{
+    width:510px;
+	    height:100%;
+	    margin-top:5%;
+		margin-bottom:none;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		
+  		border: 1px solid black;
+}
+</style>
+
 </head>
 <body>
-관리자 페이지
-<div>
-유저신고글
+
+
 
 <c:if test="${empty REPORTS }">
 신고글이 없습니다
@@ -20,7 +38,7 @@
 
 
 <c:if test="${!empty REPORTS }">
-
+<div class="loginFormDiv">
 <c:set var="startPage" value="${currentPage-(currentPage%10 == 0?10:(currentPage%10))+1}"/>
 <c:set var="endPage" value="${startPage + 9 }"/>
 <c:if test="${endPage > pageCount }">
@@ -28,31 +46,35 @@
 </c:if>
 
 
+<div align="center" style="font-size: 200%">#유저 신고글</div>
 			<table>
 				<tr>
 					<td><c:if test="${currentPage > 1 }">
-							<a href="../admin/loadAdminPage.html?pageNo=${currentPage -1 }">[이전]</a>
+							<a href="../admin/loadAdminPage.html?pageNo=${currentPage -1 }"><img alt="" src="../cssImage/prev.png" width="48" height="48"></a>
 						</c:if></td>
 					<td>
-						<table>
-							<c:forEach items="${REPORTS }" var="cnt">
+						<table class="table table-striped">
 								<tr>
-									<td>글 번호: ${cnt.seqno }</td>
-									<td>제목: ${cnt.title }</td>
-									<td>신고자: ${cnt.email }</td>
-									<td>등록일: ${cnt.regi_date }</td>
+									<th>글 번호</th>
+									<th>제목</th>
+									<th>신고자</th>
+									<th>신고일</th>
+								</tr>
+							<c:forEach items="${REPORTS }" var="cnt">
+								
+								<tr>
+									<td>${cnt.seqno }</td>
+									<td>${cnt.title }</td>
+									<td>${cnt.email }</td>
+									<td>${cnt.regi_date }</td>
 
 								</tr>
-								<tr>
-									<td><p>
-											<font color="red">${cnt.content }</font>
-										</p></td>
-								</tr>
+								
 							</c:forEach>
 						</table>
 					</td>
 					<td><c:if test="${currentPage < pageCount }">
-							<a href="../admin/loadAdminPage.html?pageNo=${currentPage +1 }">[다음]</a>
+							<a href="../admin/loadAdminPage.html?pageNo=${currentPage +1 }"><img alt="" src="../cssImage/next.png" width="48" height="48"></a>
 						</c:if></td>
 				</tr>
 
@@ -89,47 +111,48 @@
 
 <br/>
 
-
+</div>
 </c:if>
 
-</div>
-<div>
-공지사항 쓰기
+<div class="loginFormDiv">
+<div align="center" style="font-size: 200%">#공지사항 쓰기</div>
 <form action="../admin/notice.html" method="post">
-<input type="text" name="title" placeholder="공지 제목"/><br/>
-<textarea rows="10" cols="80" name="content">공지 내용</textarea><br/>
-<input type="submit" value="확인">
+<input style="width: 300px" type="text" name="title" placeholder="공지 제목"/><br/>
+<textarea rows="5" cols="50" name="content">공지 내용</textarea><br/>
+<input style="width: 300px" type="submit" value="확인">
 </form>
 </div>
 
-<div>
+<div class="loginFormDiv">
 유저 블라인드
 <form action="../admin/userBlind.html" method="post">
 <input type="text" name="nickname"><input type="submit">
 </form>
 
-</div>
-<div>
+
 유저 블라인드 풀기
 <form action="../admin/userBlind2.html" method="post">
 <input type="text" name="nickname"><input type="submit">
 </form>
 
-</div>
-
-<div>
 작품 블라인드
 <form action="../admin/novelBlind.html" method="post">
 <input type="text" name="id"><input type="submit">
 </form>
 
-</div>
-<div>
+
 작품 블라인드 풀기
 <form action="../admin/novelBlind2.html" method="post">
 <input type="text" name="id"><input type="submit">
 </form>
 
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 </body>
 </html>

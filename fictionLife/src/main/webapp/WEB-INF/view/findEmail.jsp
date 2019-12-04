@@ -10,11 +10,11 @@
 <style type="text/css">
 
 #loginFormDiv{
-   width:35%;
+    width:510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -45,12 +45,16 @@
 <body>
 	
 	<div id="loginFormDiv">
-	<div>계정 찾기</div>
+	<div align="center" style="margin-bottom: 5%;">
+		<img alt="" src="../cssImage/findForm.png" width="256">
+		</div>
+	<div style="font-size: 200%">#계정 찾기,전화번호를 입력해주세요</div>
+		
 		<form action="../login/findEmail.html" method="post">
 			<input class="input" type="hidden" name="findEmailTokken" id="findEmailTokken" value="${findEmailTokkenMsg }"/>
 			<table>
 				<tr>
-					<td><input class="input" type="number" name="phone" /></td>
+					<td><input class="input" type="number" name="phone"/></td>
 				</tr>
 				<tr>
 					<td><font color="gray">비밀번호는 가입 이메일로 자동 전송됩니다</font></td>

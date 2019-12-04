@@ -11,12 +11,12 @@
 <style type="text/css">
 
 #seriesList{
-   width:35%;
+   		width:510px;
 	    height:100%;
 	    
 	    margin-bottom: 10%;
   		
-  		padding-bottom: 5%;
+  		padding-bottom: none;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
   		
@@ -24,7 +24,7 @@
 }
 
 #seriesList2{
-   width:35%;
+  		 width:510px;
 	    height:100%;
 	    margin-top:5%;
 	
@@ -48,22 +48,27 @@ font-size: 300%;
 <div id="seriesList2">
 
 		<div id="novelTitle" align="left">${parentNovel.title }</div>&nbsp;
-		<c:if test="${sessionScope.LOGINMEMBER != null }">
-		<a href="../novel/favorite.html?novelId=${parentNovel.id }">선호작 등록</a>
-		</c:if>
+		
 		<br/>
 		<div align="left">
+		<c:if test="${parentNovel.finish=='yes' }"><span style="color: #cc0000;">완결!!</span></c:if>
+		<c:if test="${parentNovel.finish=='no' }"><span style="color: #cc0000;">미완!!</span></c:if>
+		<br/>
+		<c:if test="${sessionScope.LOGINMEMBER != null }">
+		<a href="../novel/favorite.html?novelId=${parentNovel.id }&writer=${parentNovel.email}">선호작 등록</a>
+		</c:if>
+		<br/>
 		글 : <strong>${parentNovel.nickname }</strong><br/>
 		총 회차: <strong> ${parentNovel.episode }</strong>회 
 		</div>
 		</div>
-			
+		<br/>	
 		
 		<div id="seriesList">
 <%-- 		<c:if test="${parentNovel.finish =='yes' }">완결!!!</c:if> --%>
-		<div align="center">
+		<div align="center" style="margin-bottom: 10%; margin-top: 5%;">
 		<table >
-			<tr>
+			<tr bordercolor="black">
 				<td><img alt="" src="../upload/${parentNovel.image }" width="100" height="150"></td>
 				<td>${parentNovel.description }</td>
 			</tr>
@@ -75,11 +80,11 @@ font-size: 300%;
 	<c:set var="endPage" value="${pageCount }"/>
 </c:if>
 
-
+	<div style="margin-bottom: 10%;">
 		<table>
 			<tr>
 				<td><c:if test="${currentPage > 1 }">
-						<a href="../home/loadSeries.html?pageNo=${currentPage -1 }&novelId=${novelId }"><img alt="" src="../cssImage/prev.png" width="48" height="48"></a>
+						<a href="../home/loadSeries.html?pageNo=${currentPage -1 }&novelId=${novelId }"><img alt="" src="../cssImage/prev.png" width="32" height="32"></a>
 					</c:if></td>
 				<td>
 					<table>
@@ -101,11 +106,11 @@ font-size: 300%;
 					</table>
 				</td>
 				<td><c:if test="${currentPage < pageCount }">
-						<a href="../home/loadSeries.html?pageNo=${currentPage +1 }&novelId=${novelId }"><img alt="" src="../cssImage/next.png" width="48" height="48"></a>
+						<a href="../home/loadSeries.html?pageNo=${currentPage +1 }&novelId=${novelId }"><img alt="" src="../cssImage/next.png" width="32" height="32"></a>
 					</c:if></td>
 			</tr>
 		</table>
-
+		</div>
 
 		<br/>
 
@@ -138,7 +143,7 @@ font-size: 300%;
 
 <br/>
 <br/>
-<a href="#" onclick="goNovel_board();">목록으로</a>
+
 <script type="text/javascript">
 function goNovel_board() {
 	var url = '${redirectURI}';
@@ -147,7 +152,7 @@ function goNovel_board() {
 </script>
 </div>
 </c:if>
-
+<a href="#" onclick="goNovel_board();"><span style="font-size: 200%;">#목록으로</span></a>
 
 </body>
 </html>

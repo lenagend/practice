@@ -13,11 +13,11 @@
 
 
 #loginFormDiv{
-   width:35%;
+   width:510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	   
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -62,14 +62,16 @@
 	
 	<div id="loginFormDiv" align="center">
 	<c:if test="${ empty LOGINMEMBER }">
-	
+	<div align="center" style="margin-bottom: 5%;">
+		<img alt="" src="../cssImage/loginForm.png" width="256">
+	</div>
 	
 		<form:form modelAttribute="member" action="../login/login.html">
 			
 			<table >
 				<tr>
 					<td>
-						<form:input path="email" class="input" maxlength="30"/>
+						<form:input path="email" placeholder="email" class="input" maxlength="30"/>
 					</td>
 				</tr>
 				<tr>
@@ -79,7 +81,7 @@
 				</tr>
 				<tr>
 					<td>
-						<form:password path="password" class="input" maxlength="15"/>
+						<form:password path="password" placeholder="password" class="input" maxlength="15"/>
 					</td>
 				</tr>
 				<tr>

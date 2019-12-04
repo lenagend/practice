@@ -39,9 +39,7 @@ font-size: 150%;
 						<td>
 							<font color="tomato">${memberRank.ur.w_point }점</font>
 						</td>
-						<td>
-							<a href="../home/loadMyPage.html">My Page</a>
-						</td>
+						
 					</tr>
 					<tr>
 						<td>
@@ -53,9 +51,16 @@ font-size: 150%;
 						<td>
 							<font color="tomato">${memberRank.ur.r_point }점</font>
 						</td>
-						<td>
-						<c:if test="${ADMIN != null }">
-						<a href="../admin/loadAdminPage.html"><font color="red">관리자 페이지</font></a>
+						
+					</tr>
+					<tr>
+					<td>&nbsp;▶</td>
+					<td>
+							<a href="../home/loadMyPage.html">My Page</a>
+						</td>
+					<td>
+						<c:if test="${ADMIN == LOGINMEMBER.nickname }">
+						<a href="../admin/loadAdminPage.html"><span style="color: tomato; font-size: 75%">관리자 페이지</span></a>
 						</c:if>							
 						</td>
 					</tr>

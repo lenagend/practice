@@ -10,11 +10,11 @@
 <title>Insert title here</title>
 <style type="text/css">
 #loginFormDiv{
-   width:35%;
+   width: 510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	   
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -46,6 +46,10 @@
 <body>
 	
 	<div id="loginFormDiv">
+	
+	<div align="center" style="margin-bottom: 5%;">
+		<img alt="" src="../cssImage/registerForm.png" width="256">
+	</div>
 		<form:form modelAttribute="member" action="../login/doRegi.html" method="post">
 			
 			<table>

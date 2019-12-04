@@ -112,7 +112,7 @@ public class HomeController {
 			while(it.hasNext()) {
 				Novel ci =(Novel)it.next();
 				String w_icon_image= sm.getW_icon_ImageByNickname(ci.getNickname());  
-				System.out.println("아이콘 이름: "+w_icon_image);
+				
 				ci.setW_icon_image(w_icon_image);
 				i++;
 			}
@@ -312,7 +312,20 @@ public class HomeController {
 		c.setStartRow(startRow); c.setEndRow(endRow);c.setEmail(loginEmail);
 		List<Novel> myFavoriteList = sn.myFavoriteNovels(c);	
 		
-		
+		//각 닉네임으로 아이콘을 찾아와야한다...
+				if(myFavoriteList != null) {
+					Iterator it = myFavoriteList.iterator();
+					int i = 0;
+					while(it.hasNext()) {
+						Novel ci =(Novel)it.next();
+						String w_icon_image= sm.getW_icon_ImageByNickname(ci.getNickname());  
+						
+						ci.setW_icon_image(w_icon_image);
+						i++;
+					}
+					
+					
+				}
 		
 		mav.addObject("NOVEL_LIST", myFavoriteList);
 		mav.addObject("COUNT", cnt);
@@ -335,8 +348,9 @@ public class HomeController {
 		String loginEmail = loginMember.getEmail();
 		Member modifyMember = sm.checkEmail(loginEmail); 
 		
-		mav.addObject("BODY", "modifyMemberForm.jsp");
+		mav.addObject("BODY", "myPage.jsp");
 		mav.addObject("member",modifyMember);
+		mav.addObject("CONTENTNAME", "modifyForm");
 		
 		return mav;
 	}

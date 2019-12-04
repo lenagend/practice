@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 #reply{
-  		 width:35%;
+  		 width:500px;
 	    height:100%;
 	    margin-top:1%;
 	    margin-bottom: 5%;
@@ -19,16 +19,15 @@
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
   		
-  		border: 1px solid black;
 }
 
 #replTable{
 border: 1px solid black;
-background-color: silver;
+
 }
 #reReplTable{
 border: 1px solid black;
-background-color: gray;
+
 }
 </style>
 </head>
@@ -56,7 +55,7 @@ background-color: gray;
 	<tr>
 	
 		<td>
-			<textarea autofocus="autofocus" cols="90" rows="100" readonly="readonly">${EPISODE.content }</textarea>
+			<textarea autofocus="autofocus" cols="70" rows="100" readonly="readonly">${EPISODE.content }</textarea>
 	</td>
 	</tr>
 	
@@ -83,9 +82,10 @@ background-color: gray;
 		<a href="#reportForm" onclick="reportForm();">신고</a>
 		<div id="reportForm">
 		<form action="../novel/report.html?bno=${EPISODE.bno }" method="post">
-		신고하기
-		<input type="text" name="reportTitle" maxlength="100" value="불량 게시글 신고합니다"><input type="submit" value="신고"><br/>
-		<textarea rows="3" cols="80"  name="reportContent">꼭 확인 부탁드립니다</textarea>
+		
+		<input  type="text" name="reportTitle" maxlength="100" value="불량 게시글 신고합니다"><br/>
+		<textarea rows="3" cols="60"  name="reportContent">꼭 확인 부탁드립니다</textarea><br/>
+		<input style="width: 30%;" type="submit" value="신고">
 		<input type="hidden" name="epi_number" value="${EPISODE.epi_number }">
 		<input type="hidden" name="pni" value="${parentNovel.id  }">
 		</form>
@@ -96,9 +96,9 @@ background-color: gray;
 		<input type="hidden" name="pni" value="${parentNovel.id }">
 		<input type="hidden" name="bno" value="${EPISODE.bno }">
 		<input type="hidden" name="rno" id="deleteRno">
-		<textarea rows="3" cols="80" name="reply" placeholder="댓글 입력..."></textarea>
-		
-		<input type="submit" value="확인">
+		<textarea rows="3" cols="60" name="reply" placeholder="댓글 입력..."></textarea>
+		<br/>
+		<input style="width: 30%;" type="submit" value="확인">
 		</form>
 		
 		
@@ -132,7 +132,7 @@ background-color: gray;
 								<td>
 									<table id="replTable">
 										<tr>
-											<td><img alt="" src="../rank_icon/${re.r_icon_image }" width="32" height="32">	${re.nickname}
+											<td bgcolor="#66ccff"><img alt="" src="../rank_icon/${re.r_icon_image }" width="32" height="32">	${re.nickname}
 											${re.regi_date}
 											
 											<c:if test="${sessionScope.LOGINMEMBER.nickname == re.nickname }">
@@ -142,14 +142,14 @@ background-color: gray;
 											<a href="#reReplyForm" onclick="reReplyForm(${re.rno});">답글(${re.repl_cnt }개) </a></td>							
 										</tr>
 										<tr>
-											<td>${re.content }<br></td>
+											<td bgcolor="white">${re.content }<br></td>
 										</tr>	
 										<tr>
 											<td>
 									<div id="${re.rno }" class="reReplyForm">
 								<table id="reReplTable">
 									<tr>
-										<td>
+										<td bgcolor="white">
 									
 									<c:if test="${sessionScope.LOGINMEMBER != null }">
 										<form action="../reply/reReply.html" method="post">
@@ -159,7 +159,7 @@ background-color: gray;
 												type="hidden" name="bno" value="${EPISODE.bno }"> <input
 												type="hidden" name="parent_no" value="${EPISODE.bno }">
 											<input type="hidden" name="rno" value="${re.rno}"> 
-											<textarea rows="3" cols="80" name="reply" placeholder="댓글 입력..."></textarea>
+											<textarea rows="3" cols="60" name="reply" placeholder="댓글 입력..."></textarea>
 											<input	type="submit" value="확인">
 										</form>
 										</c:if>
@@ -172,7 +172,7 @@ background-color: gray;
 										<c:forEach var="rere" items="${REREPLY_LIST }">
 											<c:if test="${rere.parent_no == re.rno }">
 												<tr>
-													<td>&nbsp;ㄴ<img alt="" src="../rank_icon/${rere.r_icon_image }" width="32" height="32">${rere.nickname}
+													<td bgcolor="#0099ff">&nbsp;ㄴ<img alt="" src="../rank_icon/${rere.r_icon_image }" width="32" height="32">${rere.nickname}
 													${rere.regi_date}					
 													<c:if test="${sessionScope.LOGINMEMBER.nickname == rere.nickname }">
 													<a id="deleteReRepl" href="#deleteReRepl" onclick="deleteRepl(${rere.rno});" >삭제</a>
@@ -180,7 +180,7 @@ background-color: gray;
 													</td>
 												</tr>
 												<tr>
-													<td align="center">${rere.content}</td>
+													<td bgcolor="white" align="left">${rere.content}</td>
 												</tr>
 											</c:if>
 										</c:forEach>
@@ -196,6 +196,7 @@ background-color: gray;
 								</div>
 											</td>
 										</tr>
+			
 									</table>
 									
 									<br/>
@@ -271,5 +272,10 @@ function deleteRepl(rno){
 }
 
 </script>
+
+<br/>
+<br/>
+<br/>
+<br/>
 </body>
 </html>

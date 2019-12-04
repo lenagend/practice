@@ -14,7 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style type="text/css">
 #div_notice{
-  width:40%;
+ 		 width:510px;
 	    height:100%;
 	    margin-top: none;
 	    margin-bottom:3%;
@@ -24,7 +24,7 @@
   		background-repeat: no-repeat;
   		padding-left:5%;
   		padding-right:5%;
-  		border: 1px solid black;
+  		
 
 }
 </style>

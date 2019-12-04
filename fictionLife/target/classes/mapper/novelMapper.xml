@@ -114,7 +114,7 @@ select max(seqno) from favorite
 
 
 
-select id, image, title, episode, email, regi_date, finish, description, type, epi_regi_date,  favorite_num from
+select * from
 (
 	select a.*, rownum rn from(
 		

@@ -11,11 +11,11 @@
 <style type="text/css">
 
 #loginFormDiv{
-   width:35%;
+    width:510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	   
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -46,7 +46,9 @@
 <body>
 	
 	<div id="loginFormDiv">
-		
+		<div align="center" style="margin-bottom: 5%;">
+		<img alt="" src="../cssImage/emailForm.png" width="256">
+		</div>	
 			인증번호를 입력해주세요
 			<form:form modelAttribute="emailCondition" action="../login/emailResult.html">
 			<form:hidden path="email" />

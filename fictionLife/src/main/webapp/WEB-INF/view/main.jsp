@@ -33,10 +33,10 @@ color black;
 }
 
 #div_notice{
-  width:40%;
+ 		 width:510px;
 	    height:100%;
-	    margin-top: none;
-	    margin-bottom:3%;
+	    margin-top: 5%;
+	    
   		padding-top: none;
   		padding-bottom:  none;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
@@ -44,14 +44,15 @@ color black;
   		padding-left:5%;
   		padding-right:5%;
   		border: 1px solid black;
+  		padding-right: 1px;
 
 }
 #div_board{
 
-  width:40%;
+   width:510px;
 	    height:100%;
-	    margin-top:none;
-	    margin-bottom: 3%;
+	    margin-top:5%;
+	   
   		padding-top: none;
   		padding-bottom:  none;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
@@ -60,10 +61,10 @@ color black;
   		border: 1px solid black;
 }
 .imageContents{
- width:40%;
+		 width:510px;
 	    height:100%;
-	    margin-top:none;
-	    margin-bottom: 3%;
+	    margin-top:5%;
+	    
   		padding-top: none;
   		padding-bottom:  none;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
@@ -76,22 +77,18 @@ color black;
 </head>
 
 <body>
-<script type="text/javascript">
-function loginButton(){
-	location.href="../home/loadLogin.html";
-}
-</script>
+
 	
 	<div data-role="page">	
 		<div data-role="header"> <!-- 로고, 로그인 메뉴 -->
 			<div align="center">
 			<table>
 				<tr>
-					<td><a href="../home/goMain.html"><img alt="" src="../cssImage/FictionLife.png"></a></td>
+					<td><a href="../home/goMain.html"><img alt="" src="../cssImage/fictionLife.png"></a></td>
 					<td>
 						<c:choose>
 							<c:when test="${sessionScope.LOGINMEMBER == null }">
-									<button id="loginButton" onclick="loginButton();">로그인</button>
+									<a style="font-size: 150%;" href="../home/loadLogin.html">Login</a>
 							</c:when>
 							<c:otherwise>
 								<jsp:include page="${LOGINRESULT }"></jsp:include>
@@ -125,7 +122,7 @@ function loginButton(){
 			<div class="imageContents"><!-- 첫번째 이미지 슬라이드와 그 소개 -->
 				<table>
 					<tr>
-						<td><div class="menu"> #TOP5 작가님들 작품 </div></td>
+						<td><div class="menu"><a id="top5" href="#top5"> #TOP5 작가님들 작품</a> </div></td>
 						
 						
 					</tr>
@@ -166,7 +163,7 @@ function loginButton(){
 					<div class="imageContents">
 					<table>
 					<tr>
-						<td><div class="menu"> #오늘 추천수 TOP5 </div></td>
+						<td><div class="menu"><a id="recotop5" href="#recotop5"> #오늘 추천수 TOP5</a> </div></td>
 					</tr>
 					<tr>
 						<td align="center">
@@ -195,11 +192,12 @@ function loginButton(){
 		
 			
 			<div id="div_notice">
+			<div align="left">
 			<c:if test="${! empty NOTICE_LIST }">			
 			<table class="table table-striped">
 			<thead>
 				<tr>
-					<td><div class="menu">#공지사항</div></td>
+					<td><div class="menu"><a id="noticeList" href="#noticeList">#공지사항</a></div></td>
 				</tr>
 				<tr>
 					<th>제목</th><th>작성자</th><th>작성일</th>
@@ -219,12 +217,18 @@ function loginButton(){
 			<div align="left" class="text_link"><a href="../home/loadNotice.html">more...</a></div>
 			</c:if>
 			</div>
+			</div>
 			
 			
 			<div id="div_board" align="center"><!-- 연재게시판 -->
 				<table>
 					<tr>
-						<td><div align="left" class="menu">#연재 게시판</div></td>
+						<td><div align="left" class="menu"><a id="novel_board" href="#novel_board">#연재 게시판</a></div></td>
+					</tr>
+					<tr>
+						<td>완결:<img alt="" src="../cssImage/redLink.png" width="16" height="16">&nbsp;
+							미완:<img alt="" src="../cssImage/blueLink.png" width="16" height="16">
+						</td>
 					</tr>
 					<tr>
 						<td>
@@ -261,18 +265,9 @@ function loginButton(){
 		</div>
 		
 		<div data-role="footer">
-		<div align="center">
-			<table>
-				<tr>
-					<td>
-						<table>
-							<tr><td>대표: 김광민</td></tr>
-							<tr><td>문의전화: 010-7159-2578</td></tr>
-						</table>
-					</td>
-				
-				</tr>
-			</table>
+		<div align="center" style="margin-top: 10%">
+			
+			<img alt="" src="../cssImage/footer.png">
 		</div>
 	</div>	
 </div>

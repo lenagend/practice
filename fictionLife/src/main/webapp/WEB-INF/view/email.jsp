@@ -10,11 +10,11 @@
 <style type="text/css">
 
 #loginFormDiv{
-   width:35%;
+    width:510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	    
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -44,8 +44,11 @@
 </head>
 <body>
 	<div id="loginFormDiv">
-		우선, 이메일 인증이 필요합니다
 		
+		<div align="center" style="margin-bottom: 5%;">
+		<img alt="" src="../cssImage/emailForm.png" width="256">
+		</div>
+		<span style="font-size: 150%;">#우선, 이메일 인증이 필요합니다</span>
 			<form:form modelAttribute="emailCondition"
 				action="../login/emailAuth.html">
 

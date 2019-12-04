@@ -11,11 +11,11 @@
 <style type="text/css">
 
 #loginFormDiv{
-   width:35%;
+   width:510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	    
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -52,7 +52,10 @@
 </head>
 <body>
 
-<div id="loginFormDiv">계정 찾기 결과
+<div id="loginFormDiv"> <div style="font-size: 200%;">#계정 찾기 결과</div>
+	<div align="center" style="margin-bottom: 5%;">
+		<img alt="" src="../cssImage/findForm.png" width="256">
+		</div>
 	<form action="../home/loadFindEmail.html" method="post">
 		<table>
 			<c:choose>
@@ -60,7 +63,7 @@
 					<tr>
 						<td>
 							<div id="resultMsg">
-								<font color="red">해당 전화번호는 없습니다</font>
+								<font color="red" size="5">해당 전화번호는 없습니다</font>
 							</div>
 						</td>
 					</tr>
@@ -73,10 +76,10 @@
 				</c:when>
 				<c:otherwise>
 					<tr>
-						<td>이메일 : ${findEmailResult }</td>
+						<td style="font-size: 150%;">이메일 : ${findEmailResult }</td>
 					</tr>
 					<tr>
-						<td><font color="gray">비밀번호가 이메일로 전송되었습니다</font></td>
+						<td><font color="red" size="5">비밀번호가 이메일로 전송되었습니다</font></td>
 					</tr>
 					<tr>
 						<td><a class="text_link" href="../home/goMain.html">홈으로</a></td>
