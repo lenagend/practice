@@ -15,7 +15,7 @@ update novel set blind = 'yes' where id=#{value}
 
 
 
-select seqno, email, title, content, regi_date from
+select * from
 (
 	select a.*, rownum rn from(
 		

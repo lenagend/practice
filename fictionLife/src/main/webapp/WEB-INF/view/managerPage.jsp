@@ -64,7 +64,7 @@
 								
 								<tr>
 									<td>${cnt.seqno }</td>
-									<td>${cnt.title }</td>
+									<td><a href="../admin/loadReportReader.html?content=${cnt.content }&bno=${cnt.r_bno}&novelId=${cnt.novel_id}&epi=${cnt.epi}">${cnt.title }</a></td>
 									<td>${cnt.email }</td>
 									<td>${cnt.regi_date }</td>
 
@@ -113,6 +113,9 @@
 
 </div>
 </c:if>
+
+
+
 
 <div class="loginFormDiv">
 <div align="center" style="font-size: 200%">#공지사항 쓰기</div>

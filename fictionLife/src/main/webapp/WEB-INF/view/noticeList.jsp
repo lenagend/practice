@@ -14,7 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style type="text/css">
 #div_notice{
- 		 width:510px;
+ 		width:510px;
 	    height:100%;
 	    margin-top: none;
 	    margin-bottom:3%;
@@ -35,8 +35,9 @@
 </c:if>
 
 <c:if test="${!empty NOTICE_LIST }">
-<div id="div_notice">
 
+<div id="div_notice">
+<span style="font-size: 200%; margin-top: 10%;">#공지사항</span>
 
 <c:set var="startPage" value="${currentPage-(currentPage%10 == 0?10:(currentPage%10))+1}"/>
 <c:set var="endPage" value="${startPage + 9 }"/>
@@ -44,9 +45,9 @@
 	<c:set var="endPage" value="${pageCount }"/>
 </c:if>
 
-
+			
 	
-					<table class="table table-striped">
+					<table class="table table-striped" >
 					<tr>
 						<th>글 번호</th>
 						<th>제목</th>
@@ -102,7 +103,7 @@
 </c:if>
 
 
-<a href="../home/loadMyPage.html?pageNo=${pageCount}">[마지막]</a>
+
 
 </div>
 </c:if>

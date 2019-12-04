@@ -25,7 +25,7 @@
    width:510px;
 	    height:100%;
 	    margin-top:1%;
-		margin-bottom:20%;
+		
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
   		
@@ -38,10 +38,11 @@
    width:510px;
 	    height:100%;
 	    margin-top:1%;
-		margin-bottom:20%;
+		
+		padding-top:10%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
-  		
+  		border: 1px solid black;
   		
 }
 .Text_type{
@@ -75,7 +76,7 @@ color: #cc0000;
    width:510px;
 	    height:100%;
 	    margin-top:1%;
-		margin-bottom:20%;
+		
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
   		
@@ -99,12 +100,12 @@ color: #cc0000;
 
 <div id="favorite">
 <c:if test="${empty NOVEL_LIST }">
-<a href="../home/loadRegiNovel.html">#관심작품이 없습니다.</a>
+<a style="font-size: 200%; margin-top: 30%;" href="#">#관심작품이 없습니다.</a>
 </c:if>
 
 <c:if test="${!empty NOVEL_LIST }">
 
-
+<span style="font-size: 200%">#관심작품</span>
 <c:set var="startPage" value="${currentPage-(currentPage%10 == 0?10:(currentPage%10))+1}"/>
 <c:set var="endPage" value="${startPage + 9 }"/>
 <c:if test="${endPage > pageCount }">
@@ -223,6 +224,7 @@ color: #cc0000;
 
 
 <c:if test="${CONTENTNAME == 'MYNOVEL' }">
+<span style="font-size: 200%">#내 작품</span>
 <div id="my">
 <c:if test="${empty NOVEL_LIST }">
 <a style="font-size: 200%; margin-top: 30%" href="../home/loadRegiNovel.html">#작품이 없습니다 새로 작품을 동록하세요</a>
@@ -334,7 +336,7 @@ color: #cc0000;
 
 
 <c:if test="${CONTENTNAME == 'modifyForm'}">
-
+<span style="font-size: 200%">#개인정보 수정</span>
 <div id="loginFormDiv">
 		<form:form id="modifyForm" modelAttribute="member" action="../login/doMemberModify.html" method="post">
 			

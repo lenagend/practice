@@ -336,7 +336,8 @@ public class LoginController {
 		String checkPwd = member.getPassword();
 		Member dbMember = sm.checkEmail(member.getEmail());
 		if(br.hasErrors()) { //단순폼체크
-			mav.addObject("BODY", "modifyMemberForm.jsp");
+			mav.addObject("CONTENTNAME", "modifyForm");
+			mav.addObject("BODY", "myPage.jsp");
 		
 			return mav;
 		}
@@ -344,15 +345,17 @@ public class LoginController {
 			//비밀번호 확인 결과 다름
 			FieldError fe = new FieldError("modifyMemberForm.jsp", "newPassword", "비밀번호 값이 일치하지 않습니다");
 			br.addError(fe);
-			mav.addObject("BODY", "modifyMemberForm.jsp");
+			mav.addObject("CONTENTNAME", "modifyForm");
+			mav.addObject("BODY", "myPage.jsp");
 			return mav;
 		}
 	
 		if(!checkPwd.equals(dbMember.getPassword())) {
 			
 			FieldError fe = new FieldError("modifyMemberForm.jsp", "password", "비밀번호가 다릅니다");
-			br.addError(fe);		
-			mav.addObject("BODY", "modifyMemberForm.jsp");
+			br.addError(fe);	
+			mav.addObject("CONTENTNAME", "modifyForm");
+			mav.addObject("BODY", "myPage.jsp");
 			return mav;
 		}else {
 			if(member.getAct().equals("수정")) {

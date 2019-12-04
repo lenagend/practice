@@ -54,6 +54,7 @@ public class HomeController {
 			cnt = sn.countSearchNovel(search);
 		}else {
 			cnt = sn.countNovelList();
+		
 		}
 
 
@@ -142,7 +143,16 @@ public class HomeController {
 		
 		mav.addObject("NOVEL_LIST", allNovelList);
 		mav.addObject("COUNT", cnt);
+		
 		mav.addObject("pageCount", pageCnt);
+		System.out.println("cnt: "+ cnt);
+		System.out.println("cnt: "+ cnt);System.out.println("cnt: "+ cnt);System.out.println("cnt: "+ cnt);System.out.println("cnt: "+ cnt);System.out.println("cnt: "+ cnt);
+		System.out.println("pageCnt: "+ pageCnt);
+		System.out.println("pageCnt: "+ pageCnt);
+		System.out.println("pageCnt: "+ pageCnt);
+		System.out.println("pageCnt: "+ pageCnt);
+		
+		
 		mav.addObject("startRow", startRow);
 		mav.addObject("endRow", endRow);
 		mav.addObject("currentPage", currentPage);
@@ -151,56 +161,7 @@ public class HomeController {
 
 		return mav;
 	}
-//	@RequestMapping(value="/home/goMainTypeView.html")
-//	public ModelAndView goMainTypeView(Integer pageNo, String novelType){
-//
-//		
-//		
-//		ModelAndView mav = new ModelAndView("main");
-//		Integer cnt = 0;
-//		
-//		
-//		
-//			cnt= sn.countTypeNovelList(novelType);
-//		
-//		
-//	
-//		
-//		if(cnt==null) cnt=0;
-//		
-//		int startRow = 0; int endRow=0;int pageCnt=0;
-//		int currentPage=0;
-//		
-//		if(pageNo==null) currentPage =1;
-//		else currentPage = pageNo;
-//		
-//		if(cnt>0) {
-//			pageCnt = cnt/5;
-//			if(cnt % 5>0) pageCnt++;
-//			startRow = (currentPage-1)*5 +1;
-//			endRow = currentPage * 5;
-//			
-//			if(endRow > cnt) endRow = cnt;
-//			
-//		}
-//		PagingCondition c = new PagingCondition();
-//		c.setStartRow(startRow); c.setEndRow(endRow); c.setType(novelType);
-//
-//		List<Novel> allNovelList= sn.findNovelByType(c);;
-//			
-//
-//		mav.addObject("NOVEL_LIST", allNovelList);
-//		mav.addObject("COUNT", cnt);
-//		mav.addObject("pageCount",pageCnt);
-//		mav.addObject("startRow",startRow);
-//		mav.addObject("endRow",endRow);
-//		mav.addObject("currentPage",currentPage);
-//		mav.addObject("BODY", null);
-//		mav.addObject("BOARD", "novelBoard.jsp");
-//
-//		return mav;
-//	}
-	
+
 	@RequestMapping(value="/home/loadLogin.html")
 	public ModelAndView doLogin(HttpServletRequest request) {
 		//로그인후 이 페이지로 이동하려면...

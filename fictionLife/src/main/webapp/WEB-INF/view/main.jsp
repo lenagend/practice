@@ -35,7 +35,7 @@ color black;
 #div_notice{
  		 width:510px;
 	    height:100%;
-	    margin-top: 5%;
+	    margin-top: 2%;
 	    
   		padding-top: none;
   		padding-bottom:  none;
@@ -51,7 +51,7 @@ color black;
 
    width:510px;
 	    height:100%;
-	    margin-top:5%;
+	    margin-top:2%;
 	   
   		padding-top: none;
   		padding-bottom:  none;
@@ -63,7 +63,7 @@ color black;
 .imageContents{
 		 width:510px;
 	    height:100%;
-	    margin-top:5%;
+	    margin-top:2%;
 	    
   		padding-top: none;
   		padding-bottom:  none;
@@ -163,7 +163,7 @@ color black;
 					<div class="imageContents">
 					<table>
 					<tr>
-						<td><div class="menu"><a id="recotop5" href="#recotop5"> #오늘 추천수 TOP5</a> </div></td>
+						<td><div class="menu"><a id="recotop5" href="#recotop5"> #관심작품 TOP5</a> </div></td>
 					</tr>
 					<tr>
 						<td align="center">
@@ -194,7 +194,7 @@ color black;
 			<div id="div_notice">
 			<div align="left">
 			<c:if test="${! empty NOTICE_LIST }">			
-			<table class="table table-striped">
+			<table class="table table-striped" >
 			<thead>
 				<tr>
 					<td><div class="menu"><a id="noticeList" href="#noticeList">#공지사항</a></div></td>

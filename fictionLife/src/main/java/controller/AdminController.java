@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,4 +164,17 @@ public class AdminController {
 		mav.addObject("modify", "OK");
 		return mav;
 	};
+	
+	@RequestMapping(value="/admin/loadReportReader.html")
+	public ModelAndView loadNoticeReader(String content,  Integer novelId, Integer epi, Integer bno  ) {
+		
+		ModelAndView mav = new ModelAndView("main");
+		mav.addObject("BODY", "reportReader.jsp");
+		mav.addObject("content", content);
+		mav.addObject("novelId", novelId);
+		mav.addObject("epi", epi);
+		mav.addObject("bno", bno);
+		return mav;
+		
+	}
 }

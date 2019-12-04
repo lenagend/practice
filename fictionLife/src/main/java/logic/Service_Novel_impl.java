@@ -40,7 +40,10 @@ public class Service_Novel_impl implements Service_Novel {
 	}
 
 	public void deleteNovel(Integer id) {
+		
 		nv.deleteNovel(id);
+		nv.novelFinish(id);
+		//완결처리해야됨여기서
 	}
 
 	public void insertEpi(Novel_board novel_board) {

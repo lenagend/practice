@@ -11,8 +11,8 @@
    width:510px;
 	    height:100%;
 	    margin-top:5%;
-	    margin-bottom: 30%;
-  		padding-top: 20%;
+	   margin-bottom: 0%;
+  		padding-top: 5%;
   		padding-bottom: 5%;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
@@ -43,7 +43,7 @@
 <body>
 <div id="loginFormDiv">
 <form action="../admin/modifyNotice.html" method="post">
-공지번호: ${bno }<br/>
+<span style="font-size: 200%;">#공지번호: ${bno } 번글 수정</span><br/>
 <input class="input" type="hidden" name="bno" value="${bno }"><br/>
 <input class="input" type="text" name="title" value="${title }"><br/>
 <textarea rows="10" cols="60" name="content">${content }</textarea>

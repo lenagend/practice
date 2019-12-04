@@ -78,18 +78,26 @@ location.replace("../home/goMain.html");
 								<c:if test="${cnt.finish=='no' }">
 								<a href="../home/loadSeries.html?novelId=${cnt.id }"><span id="Text_title">${cnt.title }</span></a>
 								</c:if>
-								&nbsp;<span id="Text_type">장르 : ${cnt.type }</span>
+								&nbsp;<span id="Text_type">장르 : ${cnt.type } </span>
+								<c:if test="${ADMIN == LOGINMEMBER.nickname }">
+									<a href="../admin/novelBlind.html?id=${cnt.id}"> 블라인드</a>
+								</c:if>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<img alt="" src="../rank_icon/${cnt.w_icon_image}" width="16" height="16">
 							
-								${cnt.nickname } 작가님&nbsp;<span id="Text_upload">${cnt.episode }화 업로드!!</span>
+								${cnt.nickname } 작가님
+								<c:if test="${ADMIN == LOGINMEMBER.nickname }">
+									<a href="../admin/userBlind.html?nickname=${cnt.nickname}"> 블라인드</a>
+								</c:if>
+								 &nbsp;<span id="Text_upload">${cnt.episode }화 업로드!!</span>
 								&nbsp;<img alt="" src="../cssImage/star.png" width="16" height="16">${cnt.favorite_num } 
 							</td>
 						
 						</tr>
+							
 					</table>
 				</td>
 				

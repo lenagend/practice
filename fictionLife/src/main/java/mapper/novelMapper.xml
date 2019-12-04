@@ -206,21 +206,12 @@ where rownum = 1
 
 <select id="findTop10NovelByReco_cnt" resultType="model.Novel">
 
-select id, title, image from novel
-where id in
-(select novel_id from
-(select * from novel_board 
-where blind !='yes'
- and
-regi_date between 
- to_char(sysdate-2, 'YYYY-MM-DD')
-and to_char(sysdate, 'YYYY-MM-DD')
 
-order by reco_cnt desc)
-where rownum between 1 and 5 
-)
-and blind != 'yes'
-order by epi_regi_date desc
+select a.id, a.title, a.image from 
+(select * from novel
+where blind != 'yes'
+order by favorite_num desc)a
+where rownum between 1 and 5
 
 
 
@@ -283,7 +274,7 @@ select max(seqno) from report_novel
 </select>
 
 <insert id="insertReport">
-insert into report_novel values(#{seqno},#{email},#{r_bno},#{title},#{content}, to_char(sysdate))
+insert into report_novel values(#{seqno},#{email},#{r_bno},#{title},#{content}, to_char(sysdate), #{novel_id}, #{epi})
 </insert>
 
 <select id="cherkReportAlready" resultType="Integer">

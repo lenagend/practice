@@ -15,6 +15,23 @@ public class Report_novel {
 	private String title;
 	private String content;
 	private String regi_date;
+	private Integer novel_id;
+	private Integer epi;
+	
+	public Integer getEpi() {
+		return epi;
+	}
+	public void setEpi(Integer epi) {
+		this.epi = epi;
+	}
+	
+	public Integer getNovel_id() {
+		return novel_id;
+	}
+	public void setNovel_id(Integer novel_id) {
+		this.novel_id = novel_id;
+	}
+	
 	public Integer getSeqno() {
 		return seqno;
 	}

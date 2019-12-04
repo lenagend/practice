@@ -379,6 +379,8 @@ public class NovelController {
 		rn.setTitle(reportTitle);
 		rn.setContent(reportContent);
 		rn.setR_bno(bno);
+		rn.setNovel_id(pni);
+		rn.setEpi(epi_number);
 		Integer check = sn.cherkReportAlready(rn);
 		if(check==0) {
 			//아직신고 안한글. 인설트
